@@ -6,9 +6,9 @@ import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class Ventana extends JFrame{
+public class Ventana extends JFrame implements MouseListener{
     int tecla = 0;
-    public JPanel panel;
+    public JPanel panel = new JPanel();
     PanelPelota pelota = new PanelPelota();
     Balon balon = new Balon(200, 200, 0,0);
     Timer gameLoopTimer;
@@ -25,12 +25,15 @@ public class Ventana extends JFrame{
 
 
     public Ventana(){
+        panel.addMouseListener(this);
         pelota.setBalon(balon);
         panelJugador1.setJugador1(jugador1);
         this.setBounds(100,100,700,700);
         //this.getContentPane().setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         iniciarComponentes();
+
+
 
         this.addKeyListener(new KeyAdapter() {
             @Override
@@ -55,6 +58,8 @@ public class Ventana extends JFrame{
 
 
                 if(keyPress == 1){
+
+
                     switch (tecla){
                         case 8:
                             jugador1.setVelocidadX(0);
@@ -142,6 +147,10 @@ public class Ventana extends JFrame{
                     balon.setVelocidadY(balon.getVelocidadY() * 0.89);
                     //jugador1.moverJugador();
                 }
+
+                jugador1.setVelocidadX(jugador1.getVelocidadX()*0.99);
+                jugador1.setVelocidadY(jugador1.getVelocidadY()*0.99);
+
                 tecla = 0;
                 jugador1.moverJugador();
                 panelJugador1.repaint();
@@ -161,7 +170,7 @@ public class Ventana extends JFrame{
     }
 
     public void colocarPanel(){
-        panel = new JPanel();
+
         panel.setLayout(null);
         panel.setBackground(Color.GREEN);
         this.getContentPane().add(panel);
@@ -181,13 +190,48 @@ public class Ventana extends JFrame{
     }
 
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
 
+    }
 
+    @Override
+    public void mousePressed(MouseEvent e) {
 
+    }
 
+    @Override
+    public void mouseReleased(MouseEvent e) {
 
+        double mousePositionX = e.getX();
+        double mousePositionY = e.getY();
+        double diferenciaMouseJugadorX = Math.abs(mousePositionX - jugador1.getX());
+        double diferenciaMouseJugadorY = Math.abs(mousePositionY - jugador1.getY());
 
+        double symbolX = 1;
+        double symbolY = 1;
+        if(mousePositionX < jugador1.getX()){
+            symbolX = -1;
+        }
+        if(mousePositionY < jugador1.getY()){
+            symbolY = -1;
+        }
 
+        double anguloDeDireccion = Math.atan(diferenciaMouseJugadorY/diferenciaMouseJugadorX);
+        jugador1.setVelocidadX(symbolX*5*Math.cos(anguloDeDireccion));
+        jugador1.setVelocidadY(symbolY*5*Math.sin(anguloDeDireccion));
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 }
 
 
