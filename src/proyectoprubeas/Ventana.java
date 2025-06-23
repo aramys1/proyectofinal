@@ -202,7 +202,7 @@ public class Ventana extends JFrame implements MouseListener{
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        colision = 0;
         double mousePositionX = e.getX();
         double mousePositionY = e.getY();
         double diferenciaMouseJugadorX = Math.abs(mousePositionX - jugador1.getX());
@@ -210,16 +210,16 @@ public class Ventana extends JFrame implements MouseListener{
 
         double symbolX = 1;
         double symbolY = 1;
-        if(mousePositionX < jugador1.getX()){
+        if(mousePositionX > jugador1.getX()){
             symbolX = -1;
         }
-        if(mousePositionY < jugador1.getY()){
+        if(mousePositionY > jugador1.getY()){
             symbolY = -1;
         }
 
         double anguloDeDireccion = Math.atan(diferenciaMouseJugadorY/diferenciaMouseJugadorX);
-        jugador1.setVelocidadX(symbolX*5*Math.cos(anguloDeDireccion));
-        jugador1.setVelocidadY(symbolY*5*Math.sin(anguloDeDireccion));
+        jugador1.setVelocidadX(symbolX*50*Math.cos(anguloDeDireccion));
+        jugador1.setVelocidadY(symbolY*50*Math.sin(anguloDeDireccion));
 
     }
 
