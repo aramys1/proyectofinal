@@ -143,8 +143,17 @@ public class Ventana extends JFrame implements MouseListener{
             }
 
             double anguloDeDireccion = Math.atan(diferenciaMouseJugadorY/diferenciaMouseJugadorX);
-            jugador1.setVelocidadX(symbolX*50*Math.cos(anguloDeDireccion));
-            jugador1.setVelocidadY(symbolY*50*Math.sin(anguloDeDireccion));
+            double hipotenusa = Math.sqrt(diferenciaMouseJugadorX*diferenciaMouseJugadorX + diferenciaMouseJugadorY*diferenciaMouseJugadorY);
+
+            if(hipotenusa >= 100){
+                jugador1.setVelocidadX(symbolX*100*Math.cos(anguloDeDireccion));
+                jugador1.setVelocidadY(symbolY*100*Math.sin(anguloDeDireccion));
+            }
+            else if(hipotenusa < 100){
+                jugador1.setVelocidadX(symbolX*5*Math.cos(anguloDeDireccion));
+                jugador1.setVelocidadY(symbolY*5*Math.sin(anguloDeDireccion));
+            }
+
         }
 
     }
