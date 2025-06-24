@@ -17,7 +17,7 @@ public class PanelJugador1 extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.BLUE);
-        g.fillOval((int)jugador1.getX(), (int)jugador1.getY(), 40, 40);
+        g.fillOval((int)jugador1.getX(), (int)jugador1.getY(), 60, 60);
     }
 
 }

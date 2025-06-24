@@ -8,7 +8,7 @@ public class Balon {
     double y;
     double velocidadY;
     double velocidadX;
-    double diametro = 40;
+    double diametro = 60;
 
 
 

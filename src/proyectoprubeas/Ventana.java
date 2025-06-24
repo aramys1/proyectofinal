@@ -35,93 +35,10 @@ public class Ventana extends JFrame implements MouseListener{
 
 
 
-        this.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                int keyCode = e.getKeyCode(); // Obtener el código de la tecla presionada
-
-                if (keyCode >= KeyEvent.VK_NUMPAD0 && keyCode <= KeyEvent.VK_NUMPAD9) {
-                    tecla = keyCode - KeyEvent.VK_NUMPAD0;
-                    keyPress = 1;
-                    System.out.println("Se presiono una tecla");// Convertir el código de tecla a su valor numérico
-                }
-
-
-            }
-        });
-
 
         gameLoopTimer = new Timer (30, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-
-
-
-                if(keyPress == 1){
-
-
-                    switch (tecla){
-                        case 8:
-                            jugador1.setVelocidadX(0);
-                            jugador1.setVelocidadY(-10);
-                            colision = 0;
-                            velocidadxantes = jugador1.getVelocidadX();
-                            velocidadyantes = jugador1.getVelocidadY();
-
-                            break;
-                        case 2:
-                            jugador1.setVelocidadX(0);
-                            jugador1.setVelocidadY(10);
-                            colision = 0;
-                            velocidadxantes = jugador1.getVelocidadX();
-                            velocidadyantes = jugador1.getVelocidadY();
-                            break;
-                        case 4:
-                            jugador1.setVelocidadX(-10);
-                            jugador1.setVelocidadY(0);
-                            colision = 0;
-                            velocidadxantes = jugador1.getVelocidadX();
-                            velocidadyantes = jugador1.getVelocidadY();
-                            break;
-                        case 6:
-                            jugador1.setVelocidadX(10);
-                            jugador1.setVelocidadY(0);
-                            colision = 0;
-                            velocidadxantes = jugador1.getVelocidadX();
-                            velocidadyantes = jugador1.getVelocidadY();
-                            break;
-                        case 9:
-                            jugador1.setVelocidadX(10);
-                            jugador1.setVelocidadY(-10);
-                            colision = 0;
-                            break;
-                        case 3:
-                            jugador1.setVelocidadX(10);
-                            jugador1.setVelocidadY(10);
-                            colision = 0;
-                            break;
-                        case 1:
-                            jugador1.setVelocidadX(-10);
-                            jugador1.setVelocidadY(10);
-                            colision = 0;
-                            break;
-                        case 7:
-                            jugador1.setVelocidadX(-10);
-                            jugador1.setVelocidadY(-10);
-                            colision = 0;
-                            break;
-                        default:
-                            colision = 0;
-                            break;
-                    }
-                }
-
-
-
-
-
-
-
 
 
                 Rectangle boundsBalon = balon.getBounds();
@@ -190,6 +107,10 @@ public class Ventana extends JFrame implements MouseListener{
     }
 
 
+    //variables para mouse
+    double mouseXInicial = 0;
+    double mouseYInicial = 0;
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -197,29 +118,34 @@ public class Ventana extends JFrame implements MouseListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        mouseXInicial = e.getX();
+        mouseYInicial = e.getY();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        Rectangle jugadorBounds = jugador1.getBounds();
         colision = 0;
         double mousePositionX = e.getX();
         double mousePositionY = e.getY();
-        double diferenciaMouseJugadorX = Math.abs(mousePositionX - jugador1.getX());
-        double diferenciaMouseJugadorY = Math.abs(mousePositionY - jugador1.getY());
 
-        double symbolX = 1;
-        double symbolY = 1;
-        if(mousePositionX > jugador1.getX()){
-            symbolX = -1;
-        }
-        if(mousePositionY > jugador1.getY()){
-            symbolY = -1;
-        }
+        if(jugadorBounds.contains(mouseXInicial, mouseYInicial)){
+            double diferenciaMouseJugadorX = Math.abs(mousePositionX - jugador1.getX());
+            double diferenciaMouseJugadorY = Math.abs(mousePositionY - jugador1.getY());
 
-        double anguloDeDireccion = Math.atan(diferenciaMouseJugadorY/diferenciaMouseJugadorX);
-        jugador1.setVelocidadX(symbolX*50*Math.cos(anguloDeDireccion));
-        jugador1.setVelocidadY(symbolY*50*Math.sin(anguloDeDireccion));
+            double symbolX = 1;
+            double symbolY = 1;
+            if(mousePositionX > jugador1.getX()){
+                symbolX = -1;
+            }
+            if(mousePositionY > jugador1.getY()){
+                symbolY = -1;
+            }
+
+            double anguloDeDireccion = Math.atan(diferenciaMouseJugadorY/diferenciaMouseJugadorX);
+            jugador1.setVelocidadX(symbolX*50*Math.cos(anguloDeDireccion));
+            jugador1.setVelocidadY(symbolY*50*Math.sin(anguloDeDireccion));
+        }
 
     }
 
