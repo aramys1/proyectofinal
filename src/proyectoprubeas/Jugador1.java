@@ -3,16 +3,17 @@ package proyectoprubeas;
 import java.awt.*;
 
 public class Jugador1 {
-    double x = 300;
-    double y = 50;
+    double x = 0;
+    double y = 0;
     double velocidadX = 0;
     double velocidadY = 0;
-    double ancho = 40;
-    double alto = 40;
+    double diametro = 60;
 
 
-
-    public Jugador1(){}
+    public Jugador1(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
 
     //metodo que mueve el balon
     public void moverJugador(){
@@ -26,8 +27,8 @@ public class Jugador1 {
             velocidadX = velocidadX * 0.5;
             velocidadY = velocidadY * 0.5;
 
-        } else if (x + 60 > 700) {
-            x = 700 - 60; // Ajustar posición
+        } else if (x + diametro > 700) {
+            x = 700 - diametro; // Ajustar posición
             velocidadX *= -1; // Invertir dirección X
             System.out.println("Jugador golpeó pared derecha y rebotó!");
             velocidadX = velocidadX * 0.5;
@@ -41,8 +42,8 @@ public class Jugador1 {
             System.out.println("Jugador golpeó pared superior y rebotó!");
             velocidadX = velocidadX * 0.5;
             velocidadY = velocidadY * 0.5;
-        } else if (y + 60 > 700) {
-            y = 700 - 60; // Ajustar posición
+        } else if (y + diametro > 700) {
+            y = 700 - diametro; // Ajustar posición
             velocidadY *= -1; // Invertir dirección Y
             System.out.println("Jugador golpeó pared inferior y rebotó!");
             velocidadX = velocidadX * 0.5;
@@ -52,7 +53,7 @@ public class Jugador1 {
     }
 
     public Rectangle getBounds(){
-        return new Rectangle((int)x, (int)y, 60, 60);
+        return new Rectangle((int)x, (int)y, (int)diametro, (int)diametro);
     }
 
     public double getX() {

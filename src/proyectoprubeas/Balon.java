@@ -4,19 +4,15 @@ import java.awt.*;
 
 public class Balon {
 
-    double x;
-    double y;
+    double x = 200;
+    double y = 200;
     double velocidadY;
     double velocidadX;
     double diametro = 60;
 
 
 
-    public Balon(double x, double y, double velocidadY, double velocidadX){
-        this.velocidadX = velocidadX;
-        this.velocidadY = velocidadY;
-        this.x = x;
-        this.y = y;
+    public Balon(){
 
     }
 
