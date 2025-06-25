@@ -6,8 +6,8 @@ public class Balon {
 
     double x = 200;
     double y = 200;
-    double velocidadY;
-    double velocidadX;
+    double velocidadY = 0;
+    double velocidadX = 0;
     double diametro = 60;
 
 
@@ -46,7 +46,7 @@ public class Balon {
     }
 
     public Rectangle getBounds(){
-        return new Rectangle((int)x, (int)y, (int)diametro, (int)diametro);
+        return new Rectangle((int)x, (int)y, (int)diametro+10, (int)diametro+10);
     }
 
 

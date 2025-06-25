@@ -7,7 +7,7 @@ public class Jugador1 {
     double y = 0;
     double velocidadX = 0;
     double velocidadY = 0;
-    double diametro = 60;
+    double diametro = 90;
 
 
     public Jugador1(double x, double y) {
@@ -52,8 +52,12 @@ public class Jugador1 {
 
     }
 
+    public double getDiametro() {
+        return diametro;
+    }
+
     public Rectangle getBounds(){
-        return new Rectangle((int)x, (int)y, (int)diametro, (int)diametro);
+        return new Rectangle((int)x, (int)y, (int)diametro-10, (int)diametro-10);
     }
 
     public double getX() {
