@@ -17,6 +17,9 @@ public class Jugador1 {
 
     //metodo que mueve el balon
     public void moverJugador(){
+        if(Math.abs(this.velocidadX) < 0.01) this.velocidadX = 0;
+        if(Math.abs(this.velocidadY) < 0.01) this.velocidadY = 0;
+
         x = x + velocidadX;
         y = y + velocidadY;
 

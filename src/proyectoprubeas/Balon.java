@@ -18,6 +18,9 @@ public class Balon {
 
     //metodo que mueve el balon
     public void moverBalon(){
+        if(Math.abs(this.velocidadX) < 0.01) this.velocidadX = 0;
+        if(Math.abs(this.velocidadY) < 0.01) this.velocidadY = 0;
+
         x = x + velocidadX;
         y = y + velocidadY;
 
@@ -25,11 +28,15 @@ public class Balon {
             x = 0; // Ajustar posición para que no se salga
             velocidadX *= -1; // Invertir dirección X
             System.out.println("Jugador golpeó pared izquierda y rebotó!");
+            velocidadX = velocidadX * 0.5;
+            velocidadY = velocidadY * 0.5;
 
         } else if (x + diametro > 700) {
             x = 700 - diametro; // Ajustar posición
             velocidadX *= -1; // Invertir dirección X
             System.out.println("Jugador golpeó pared derecha y rebotó!");
+            velocidadX = velocidadX * 0.5;
+            velocidadY = velocidadY * 0.5;
         }
 
         // Comprobar colisión con bordes verticales y rebotar
@@ -37,10 +44,14 @@ public class Balon {
             y = 0; // Ajustar posición
             velocidadY *= -1; // Invertir dirección Y
             System.out.println("Jugador golpeó pared superior y rebotó!");
+            velocidadX = velocidadX * 0.5;
+            velocidadY = velocidadY * 0.5;
         } else if (y + diametro > 700) {
             y = 700 - diametro; // Ajustar posición
             velocidadY *= -1; // Invertir dirección Y
             System.out.println("Jugador golpeó pared inferior y rebotó!");
+            velocidadX = velocidadX * 0.5;
+            velocidadY = velocidadY * 0.5;
         }
 
     }
