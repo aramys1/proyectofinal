@@ -22,7 +22,7 @@ public class PanelJugador1 extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(color);
-        g.fillOval((int)jugador1.getX(), (int)jugador1.getY(), 90, 90);
+        g.fillOval((int)jugador1.getX(), (int)jugador1.getY(), (int)jugador1.getDiametro(), (int)jugador1.getDiametro());
     }
 
 }

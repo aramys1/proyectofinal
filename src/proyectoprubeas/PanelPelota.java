@@ -20,6 +20,6 @@ public class PanelPelota extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.RED);
-        g.fillOval((int)balon.getX(), (int)balon.getY(), 60, 60);
+        g.fillOval((int)balon.getX(), (int)balon.getY(), (int)balon.getDiametro(), (int)balon.getDiametro());
     }
 }

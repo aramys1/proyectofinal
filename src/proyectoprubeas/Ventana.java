@@ -16,15 +16,15 @@ public class Ventana extends JFrame implements MouseListener{
     int colision = 0;
 
     //nuevo jugador
-    Jugador1 jugador2 = new Jugador1(400,400);
+    Jugador1 jugador2 = new Jugador1(50,100);
     PanelJugador1 panelJugador2 = new PanelJugador1();
 
     //otro jugador
-    Jugador1 jugador3 = new Jugador1(500,500);
+    Jugador1 jugador3 = new Jugador1(50,200);
     PanelJugador1 panelJugador3 = new PanelJugador1();
 
     //otro jugaddor
-    Jugador1 jugador4 = new Jugador1(100, 100);
+    Jugador1 jugador4 = new Jugador1(50, 300);
     PanelJugador1 panelJugador4 = new PanelJugador1();
 
     //arreglo de objetos
@@ -49,7 +49,7 @@ public class Ventana extends JFrame implements MouseListener{
         panelJugador4.setJugador1(jugador4);
         panelJugador4.setColor(Color.orange);
 
-        this.setBounds(100,100,700,700);
+        this.setBounds(100,100,700,430);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         iniciarComponentes();
 
@@ -83,7 +83,7 @@ public class Ventana extends JFrame implements MouseListener{
         panel.setLayout(null);
         panel.setBackground(Color.GREEN);
         this.getContentPane().add(panel);
-        panel.setBounds(0,0,700,700);
+        panel.setBounds(0,0,700,400);
     }
 
     public void colocarPelota(){

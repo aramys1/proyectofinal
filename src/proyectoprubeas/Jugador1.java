@@ -7,7 +7,7 @@ public class Jugador1 {
     double y = 0;
     double velocidadX = 0;
     double velocidadY = 0;
-    double diametro = 90;
+    double diametro = 60;
 
 
     public Jugador1(double x, double y) {
@@ -45,8 +45,8 @@ public class Jugador1 {
             System.out.println("Jugador golpeó pared superior y rebotó!");
             velocidadX = velocidadX * 0.5;
             velocidadY = velocidadY * 0.5;
-        } else if (y + diametro > 700) {
-            y = 700 - diametro; // Ajustar posición
+        } else if (y + diametro > 400) {
+            y = 400 - diametro; // Ajustar posición
             velocidadY *= -1; // Invertir dirección Y
             System.out.println("Jugador golpeó pared inferior y rebotó!");
             velocidadX = velocidadX * 0.5;
