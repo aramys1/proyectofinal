@@ -197,8 +197,8 @@ public class Ventana extends JFrame implements MouseListener{
                 double hipotenusa = Math.sqrt(diferenciaMouseJugadorX*diferenciaMouseJugadorX + diferenciaMouseJugadorY*diferenciaMouseJugadorY);
 
                 if(hipotenusa >= 100){
-                    jugador.setVelocidadX(symbolX*30*Math.cos(anguloDeDireccion));
-                    jugador.setVelocidadY(symbolY*30*Math.sin(anguloDeDireccion));
+                    jugador.setVelocidadX(symbolX*40*Math.cos(anguloDeDireccion));
+                    jugador.setVelocidadY(symbolY*40*Math.sin(anguloDeDireccion));
                 }
                 else if(hipotenusa < 100){
                     jugador.setVelocidadX(symbolX*10*Math.cos(anguloDeDireccion));
@@ -236,8 +236,8 @@ public class Ventana extends JFrame implements MouseListener{
                 System.out.println("el jugador golpea");
                 balon.setVelocidadX(jugador.getVelocidadX());
                 balon.setVelocidadY(jugador.getVelocidadY());
-                jugador.setVelocidadY(-jugador.getVelocidadY());
-                jugador.setVelocidadX(-jugador.getVelocidadX());
+                jugador.setVelocidadY(-0.90*jugador.getVelocidadY());
+                jugador.setVelocidadX(-0.90*jugador.getVelocidadX());
 
                 if(jugador.getX() > balon.getX()){
                     System.out.println("redibujado");
@@ -266,8 +266,8 @@ public class Ventana extends JFrame implements MouseListener{
                 System.out.println("el balon golpea");
                 jugador.setVelocidadX(balon.getVelocidadX());
                 jugador.setVelocidadY(balon.getVelocidadY());
-                balon.setVelocidadX(-balon.getVelocidadX());
-                balon.setVelocidadY(-balon.getVelocidadY());
+                balon.setVelocidadX(-1*balon.getVelocidadX());
+                balon.setVelocidadY(-1*balon.getVelocidadY());
 
 
                 if(jugador.getX() > balon.getX()){
@@ -351,24 +351,24 @@ public class Ventana extends JFrame implements MouseListener{
 
 
 
-        if(colision == 1){
-            double velocidadX = (jugador.getVelocidadX() * 0.89);
-            double velocidadY = (jugador.getVelocidadY() * 0.89);
+//        if(colision == 1){
+//            double velocidadX = (jugador.getVelocidadX() * 0.89);
+//            double velocidadY = (jugador.getVelocidadY() * 0.89);
+//
+//
+//            jugador.setVelocidadX(velocidadX);
+//            jugador.setVelocidadY(velocidadY);
+//
+//            balon.setVelocidadX(balon.getVelocidadX() * 0.99);
+//            balon.setVelocidadY(balon.getVelocidadY() * 0.99);
+//
+//        }
 
+        jugador.setVelocidadX(jugador.getVelocidadX()*0.95);
+        jugador.setVelocidadY(jugador.getVelocidadY()*0.95);
 
-            jugador.setVelocidadX(velocidadX);
-            jugador.setVelocidadY(velocidadY);
-
-            balon.setVelocidadX(balon.getVelocidadX() * 0.99);
-            balon.setVelocidadY(balon.getVelocidadY() * 0.99);
-
-        }
-
-        jugador.setVelocidadX(jugador.getVelocidadX()*0.99);
-        jugador.setVelocidadY(jugador.getVelocidadY()*0.99);
-
-        balon.setVelocidadX(balon.getVelocidadX() * 0.99);
-        balon.setVelocidadY(balon.getVelocidadY() * 0.99);
+        balon.setVelocidadX(balon.getVelocidadX() * 0.97);
+        balon.setVelocidadY(balon.getVelocidadY() * 0.97);
 
 
         tecla = 0;

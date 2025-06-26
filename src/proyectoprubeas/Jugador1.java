@@ -7,7 +7,7 @@ public class Jugador1 {
     double y = 0;
     double velocidadX = 0;
     double velocidadY = 0;
-    double diametro = 60;
+    double diametro = 50;
 
 
     public Jugador1(double x, double y) {
@@ -27,15 +27,15 @@ public class Jugador1 {
             x = 0; // Ajustar posición para que no se salga
             velocidadX *= -1; // Invertir dirección X
             System.out.println("Jugador golpeó pared izquierda y rebotó!");
-            velocidadX = velocidadX * 0.5;
-            velocidadY = velocidadY * 0.5;
+            velocidadX = velocidadX * 0.7;
+            velocidadY = velocidadY * 0.7;
 
         } else if (x + diametro > 700) {
             x = 700 - diametro; // Ajustar posición
             velocidadX *= -1; // Invertir dirección X
             System.out.println("Jugador golpeó pared derecha y rebotó!");
-            velocidadX = velocidadX * 0.5;
-            velocidadY = velocidadY * 0.5;
+            velocidadX = velocidadX * 0.7;
+            velocidadY = velocidadY * 0.7;
         }
 
         // Comprobar colisión con bordes verticales y rebotar
@@ -43,14 +43,14 @@ public class Jugador1 {
             y = 0; // Ajustar posición
             velocidadY *= -1; // Invertir dirección Y
             System.out.println("Jugador golpeó pared superior y rebotó!");
-            velocidadX = velocidadX * 0.5;
-            velocidadY = velocidadY * 0.5;
+            velocidadX = velocidadX * 0.7;
+            velocidadY = velocidadY * 0.7;
         } else if (y + diametro > 400) {
             y = 400 - diametro; // Ajustar posición
             velocidadY *= -1; // Invertir dirección Y
             System.out.println("Jugador golpeó pared inferior y rebotó!");
-            velocidadX = velocidadX * 0.5;
-            velocidadY = velocidadY * 0.5;
+            velocidadX = velocidadX * 0.7;
+            velocidadY = velocidadY * 0.7;
         }
 
     }
