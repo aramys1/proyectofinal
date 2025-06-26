@@ -27,8 +27,21 @@ public class Ventana extends JFrame implements MouseListener{
     Jugador1 jugador4 = new Jugador1(50, 300);
     PanelJugador1 panelJugador4 = new PanelJugador1();
 
+
+    //jugador rival 1
+    Jugador1 jugador5 = new Jugador1(600, 100);
+    PanelJugador1 panelJugador5 = new PanelJugador1();
+
+    //jugador rival 2
+    Jugador1 jugador6 = new Jugador1(600, 200);
+    PanelJugador1 panelJugador6 = new PanelJugador1();
+
+    //jugador rival 3
+    Jugador1 jugador7 = new Jugador1(600, 300);
+    PanelJugador1 panelJugador7 = new PanelJugador1();
+
     //arreglo de objetos
-    Jugador1[] jugadores = new Jugador1[3];
+    Jugador1[] jugadores = new Jugador1[6];
 
 
 
@@ -37,17 +50,32 @@ public class Ventana extends JFrame implements MouseListener{
         jugadores[1] = jugador3;
         jugadores[2] = jugador4;
 
+        //jugadores rivales
+        jugadores[3] = jugador5;
+        jugadores[4] = jugador6;
+        jugadores[5] = jugador7;
+
         panel.addMouseListener(this);
         pelota.setBalon(balon);
 
         panelJugador2.setJugador1(jugador2);
-        panelJugador2.setColor(Color.BLACK);
+        panelJugador2.setColor(Color.blue);
 
         panelJugador3.setJugador1(jugador3);
-        panelJugador3.setColor(Color.white);
+        panelJugador3.setColor(Color.blue);
 
         panelJugador4.setJugador1(jugador4);
-        panelJugador4.setColor(Color.orange);
+        panelJugador4.setColor(Color.blue);
+
+        //jugadores rivales
+        panelJugador5.setJugador1(jugador5);
+        panelJugador5.setColor(Color.red);
+
+        panelJugador6.setJugador1(jugador6);
+        panelJugador6.setColor(Color.red);
+
+        panelJugador7.setJugador1(jugador7);
+        panelJugador7.setColor(Color.red);
 
         this.setBounds(100,100,700,430);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,6 +91,9 @@ public class Ventana extends JFrame implements MouseListener{
                 actualizarJuego(jugador2, panelJugador2);
                 actualizarJuego(jugador3,panelJugador3);
                 actualizarJuego(jugador4, panelJugador4);
+                actualizarJuego(jugador5, panelJugador5);
+                actualizarJuego(jugador6, panelJugador6);
+                actualizarJuego(jugador7, panelJugador7);
 
             }
         });
@@ -76,12 +107,15 @@ public class Ventana extends JFrame implements MouseListener{
         colocarJugador(panelJugador2);
         colocarJugador(panelJugador3);
         colocarJugador(panelJugador4);
+        colocarJugador(panelJugador5);
+        colocarJugador(panelJugador6);
+        colocarJugador(panelJugador7);
     }
 
     public void colocarPanel(){
 
         panel.setLayout(null);
-        panel.setBackground(Color.GREEN);
+        panel.setBackground(Color.gray);
         this.getContentPane().add(panel);
         panel.setBounds(0,0,700,400);
     }
@@ -112,14 +146,26 @@ public class Ventana extends JFrame implements MouseListener{
         mouseXInicial = e.getX();
         mouseYInicial = e.getY();
     }
+    int contadorTurno = 1;
 
     @Override
     public void mouseReleased(MouseEvent e) {
         double x = e.getX();
         double y = e.getY();
-        generarDireccionMouse(x,y,jugador2);
-        generarDireccionMouse(x,y,jugador3);
-        generarDireccionMouse(x,y,jugador4);
+
+        if(contadorTurno % 2 != 0){
+            generarDireccionMouse(x,y,jugador2);
+            generarDireccionMouse(x,y,jugador3);
+            generarDireccionMouse(x,y,jugador4);
+        }
+        else if(contadorTurno % 2 == 0){
+            generarDireccionMouse(x,y,jugador5);
+            generarDireccionMouse(x,y,jugador6);
+            generarDireccionMouse(x,y,jugador7);
+        }
+
+
+
 
 
 
@@ -158,6 +204,7 @@ public class Ventana extends JFrame implements MouseListener{
                     jugador.setVelocidadX(symbolX*10*Math.cos(anguloDeDireccion));
                     jugador.setVelocidadY(symbolY*10*Math.sin(anguloDeDireccion));
                 }
+                contadorTurno++;
 
             }
         }

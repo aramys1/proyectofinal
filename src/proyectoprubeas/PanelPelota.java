@@ -19,7 +19,7 @@ public class PanelPelota extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.RED);
+        g.setColor(Color.green);
         g.fillOval((int)balon.getX(), (int)balon.getY(), (int)balon.getDiametro(), (int)balon.getDiametro());
     }
 }
