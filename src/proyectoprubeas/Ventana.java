@@ -3,8 +3,12 @@ package proyectoprubeas;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Ventana extends JFrame implements MouseListener{
+    BufferedReader bufer = new BufferedReader(new InputStreamReader(System.in));
     int tecla = 0;
     public JPanel panel = new JPanel();
     PanelPelota pelota = new PanelPelota();
@@ -15,69 +19,132 @@ public class Ventana extends JFrame implements MouseListener{
     int keyPress = 0;
     int colision = 0;
 
-    //nuevo jugador
-    Jugador1 jugador2 = new Jugador1(50,100);
-    PanelJugador1 panelJugador2 = new PanelJugador1();
+    int cantidadJugadores = 2;
 
-    //otro jugador
-    Jugador1 jugador3 = new Jugador1(50,200);
-    PanelJugador1 panelJugador3 = new PanelJugador1();
+    //objetos de jugadores
+    Jugador1 jugador2;
+    PanelJugador1 panelJugador2;
 
-    //otro jugaddor
-    Jugador1 jugador4 = new Jugador1(50, 300);
-    PanelJugador1 panelJugador4 = new PanelJugador1();
+    Jugador1 jugador3;
+    PanelJugador1 panelJugador3;
 
+    Jugador1 jugador4;
+    PanelJugador1 panelJugador4;
 
-    //jugador rival 1
-    Jugador1 jugador5 = new Jugador1(600, 100);
-    PanelJugador1 panelJugador5 = new PanelJugador1();
+    Jugador1 jugador5;
+    PanelJugador1 panelJugador5;
 
-    //jugador rival 2
-    Jugador1 jugador6 = new Jugador1(600, 200);
-    PanelJugador1 panelJugador6 = new PanelJugador1();
+    Jugador1 jugador6;
+    PanelJugador1 panelJugador6;
 
-    //jugador rival 3
-    Jugador1 jugador7 = new Jugador1(600, 300);
-    PanelJugador1 panelJugador7 = new PanelJugador1();
+    Jugador1 jugador7;
+    PanelJugador1 panelJugador7;
 
     //arreglo de objetos
-    Jugador1[] jugadores = new Jugador1[6];
+    Jugador1[] jugadores;
+    PanelJugador1[] panelesJugadores;
+
+    void setAtributosaObjetos(int cantidadJugadores){
+        for(int i = 0; i < cantidadJugadores; i++){
+            panelesJugadores[i].setJugador1(jugadores[i]);
+            if( i < cantidadJugadores/2){
+                panelesJugadores[i].setColor(Color.blue);
+            }
+            else if(i >= cantidadJugadores/2){
+                panelesJugadores[i].setColor(Color.red);
+            }
+        }
+
+    }
 
 
-
+    int cantidadDeJugadores = 0;
     public Ventana(){
-        jugadores[0] = jugador2;
-        jugadores[1] = jugador3;
-        jugadores[2] = jugador4;
+        System.out.println(Constantes.WIDTH_PANTALLA);
+        try{
+            System.out.println("Cantidad de jugadores 2, 3, 4");
+            cantidadDeJugadores = Integer.parseInt(bufer.readLine());
+        }
+        catch (IOException e){
+            System.out.println(e.getMessage());
+        }
 
-        //jugadores rivales
-        jugadores[3] = jugador5;
-        jugadores[4] = jugador6;
-        jugadores[5] = jugador7;
+        switch (cantidadDeJugadores){
+            case 2:
+                jugadores = new Jugador1[4];
+                panelesJugadores = new PanelJugador1[4];
+                //nuevo jugador
+                jugador2 = new Jugador1(100,100);
+                panelJugador2 = new PanelJugador1();
+                jugadores[0] = jugador2;
+                panelesJugadores[0] = panelJugador2;
+
+                jugador3 = new Jugador1(100,200);
+                panelJugador3 = new PanelJugador1();
+                jugadores[1] = jugador3;
+                panelesJugadores[1] = panelJugador3;
+
+                jugador4 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 100);
+                panelJugador4 = new PanelJugador1();
+                jugadores[2] = jugador4;
+                panelesJugadores[2] = panelJugador4;
+
+                jugador5 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 200);
+                panelJugador5 = new PanelJugador1();
+                jugadores[3] = jugador5;
+                panelesJugadores[3] = panelJugador5;
+
+                setAtributosaObjetos(4);
+                break;
+
+            case 3:
+                jugadores = new Jugador1[6];
+                panelesJugadores = new PanelJugador1[6];
+                //nuevo jugador
+                jugador2 = new Jugador1(100,100);
+                panelJugador2 = new PanelJugador1();
+                jugadores[0] = jugador2;
+                panelesJugadores[0] = panelJugador2;
+
+                jugador3 = new Jugador1(100,200);
+                panelJugador3 = new PanelJugador1();
+                jugadores[1] = jugador3;
+                panelesJugadores[1] = panelJugador3;
+
+                jugador4 = new Jugador1(100,300);
+                panelJugador4 = new PanelJugador1();
+                jugadores[2] = jugador4;
+                panelesJugadores[2] = panelJugador4;
+
+                jugador5 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 100);
+                panelJugador5 = new PanelJugador1();
+                jugadores[3] = jugador5;
+                panelesJugadores[3] = panelJugador5;
+
+                jugador6 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 200);
+                panelJugador6 = new PanelJugador1();
+                jugadores[4] = jugador6;
+                panelesJugadores[4] = panelJugador6;
+
+                jugador7 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 300);
+                panelJugador7 = new PanelJugador1();
+                jugadores[5] = jugador7;
+                panelesJugadores[5] = panelJugador7;
+
+                setAtributosaObjetos(6);
+                break;
+        }
+
 
         panel.addMouseListener(this);
         pelota.setBalon(balon);
 
-        panelJugador2.setJugador1(jugador2);
-        panelJugador2.setColor(Color.blue);
 
-        panelJugador3.setJugador1(jugador3);
-        panelJugador3.setColor(Color.blue);
 
-        panelJugador4.setJugador1(jugador4);
-        panelJugador4.setColor(Color.blue);
+        this.setResizable(false);
 
-        //jugadores rivales
-        panelJugador5.setJugador1(jugador5);
-        panelJugador5.setColor(Color.red);
-
-        panelJugador6.setJugador1(jugador6);
-        panelJugador6.setColor(Color.red);
-
-        panelJugador7.setJugador1(jugador7);
-        panelJugador7.setColor(Color.red);
-
-        this.setBounds(100,100,700,430);
+        this.setBounds(0, 0, Constantes.WIDTH_PANTALLA, Constantes.HEIGHT_PANTALLA);
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         iniciarComponentes();
 
@@ -88,12 +155,15 @@ public class Ventana extends JFrame implements MouseListener{
             @Override
             public void actionPerformed(ActionEvent e){
 
+
                 actualizarJuego(jugador2, panelJugador2);
                 actualizarJuego(jugador3,panelJugador3);
                 actualizarJuego(jugador4, panelJugador4);
                 actualizarJuego(jugador5, panelJugador5);
-                actualizarJuego(jugador6, panelJugador6);
-                actualizarJuego(jugador7, panelJugador7);
+                if(cantidadDeJugadores == 3){
+                    actualizarJuego(jugador6, panelJugador6);
+                    actualizarJuego(jugador7, panelJugador7);
+                }
 
             }
         });
@@ -104,12 +174,16 @@ public class Ventana extends JFrame implements MouseListener{
     public void iniciarComponentes(){
         colocarPanel();
         colocarPelota();
+
         colocarJugador(panelJugador2);
         colocarJugador(panelJugador3);
         colocarJugador(panelJugador4);
         colocarJugador(panelJugador5);
-        colocarJugador(panelJugador6);
-        colocarJugador(panelJugador7);
+        if(cantidadDeJugadores == 3){
+            colocarJugador(panelJugador6);
+            colocarJugador(panelJugador7);
+        }
+
     }
 
     public void colocarPanel(){
@@ -117,7 +191,7 @@ public class Ventana extends JFrame implements MouseListener{
         panel.setLayout(null);
         panel.setBackground(Color.gray);
         this.getContentPane().add(panel);
-        panel.setBounds(0,0,700,400);
+        panel.setBounds(0,0,Constantes.WIDTH_PANTALLA, Constantes.HEIGHT_PANTALLA);
     }
 
     public void colocarPelota(){
@@ -153,22 +227,28 @@ public class Ventana extends JFrame implements MouseListener{
         double x = e.getX();
         double y = e.getY();
 
-        if(contadorTurno % 2 != 0){
-            generarDireccionMouse(x,y,jugador2);
-            generarDireccionMouse(x,y,jugador3);
-            generarDireccionMouse(x,y,jugador4);
+        if(cantidadDeJugadores == 2){
+            if(contadorTurno % 2 != 0){
+                generarDireccionMouse(x,y,jugador2);
+                generarDireccionMouse(x,y,jugador3);
+            }
+            else if(contadorTurno % 2 == 0){
+                generarDireccionMouse(x,y,jugador4);
+                generarDireccionMouse(x,y,jugador5);
+            }
         }
-        else if(contadorTurno % 2 == 0){
-            generarDireccionMouse(x,y,jugador5);
-            generarDireccionMouse(x,y,jugador6);
-            generarDireccionMouse(x,y,jugador7);
+        if(cantidadDeJugadores == 3){
+            if(contadorTurno % 2 != 0){
+                generarDireccionMouse(x,y,jugador2);
+                generarDireccionMouse(x,y,jugador3);
+                generarDireccionMouse(x,y,jugador4);
+            }
+            else if(contadorTurno % 2 == 0){
+                generarDireccionMouse(x,y,jugador5);
+                generarDireccionMouse(x,y,jugador6);
+                generarDireccionMouse(x,y,jugador7);
+            }
         }
-
-
-
-
-
-
 
     }
 

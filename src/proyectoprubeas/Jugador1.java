@@ -30,8 +30,8 @@ public class Jugador1 {
             velocidadX = velocidadX * 0.7;
             velocidadY = velocidadY * 0.7;
 
-        } else if (x + diametro > 700) {
-            x = 700 - diametro; // Ajustar posición
+        } else if (x + diametro > Constantes.WIDTH_PANTALLA) {
+            x = Constantes.WIDTH_PANTALLA - diametro; // Ajustar posición
             velocidadX *= -1; // Invertir dirección X
             System.out.println("Jugador golpeó pared derecha y rebotó!");
             velocidadX = velocidadX * 0.7;
@@ -45,8 +45,8 @@ public class Jugador1 {
             System.out.println("Jugador golpeó pared superior y rebotó!");
             velocidadX = velocidadX * 0.7;
             velocidadY = velocidadY * 0.7;
-        } else if (y + diametro > 400) {
-            y = 400 - diametro; // Ajustar posición
+        } else if (y + diametro > Constantes.HEIGHT_PANTALLA) {
+            y = Constantes.HEIGHT_PANTALLA - diametro; // Ajustar posición
             velocidadY *= -1; // Invertir dirección Y
             System.out.println("Jugador golpeó pared inferior y rebotó!");
             velocidadX = velocidadX * 0.7;
