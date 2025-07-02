@@ -40,6 +40,12 @@ public class Ventana extends JFrame implements MouseListener{
     Jugador1 jugador7;
     PanelJugador1 panelJugador7;
 
+    Jugador1 jugador8;
+    PanelJugador1 panelJugador8;
+
+    Jugador1 jugador9;
+    PanelJugador1 panelJugador9;
+
     //arreglo de objetos
     Jugador1[] jugadores;
     PanelJugador1[] panelesJugadores;
@@ -133,7 +139,55 @@ public class Ventana extends JFrame implements MouseListener{
 
                 setAtributosaObjetos(6);
                 break;
+
+            case 4:
+                jugadores = new Jugador1[8];
+                panelesJugadores = new PanelJugador1[8];
+                //nuevo jugador
+                jugador2 = new Jugador1(100,100);
+                panelJugador2 = new PanelJugador1();
+                jugadores[0] = jugador2;
+                panelesJugadores[0] = panelJugador2;
+
+                jugador3 = new Jugador1(100,200);
+                panelJugador3 = new PanelJugador1();
+                jugadores[1] = jugador3;
+                panelesJugadores[1] = panelJugador3;
+
+                jugador4 = new Jugador1(100,300);
+                panelJugador4 = new PanelJugador1();
+                jugadores[2] = jugador4;
+                panelesJugadores[2] = panelJugador4;
+
+                jugador5 = new Jugador1(100,400);
+                panelJugador5 = new PanelJugador1();
+                jugadores[3] = jugador5;
+                panelesJugadores[3] = panelJugador5;
+
+                jugador6 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 100);
+                panelJugador6 = new PanelJugador1();
+                jugadores[4] = jugador6;
+                panelesJugadores[4] = panelJugador6;
+
+                jugador7 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 200);
+                panelJugador7 = new PanelJugador1();
+                jugadores[5] = jugador7;
+                panelesJugadores[5] = panelJugador7;
+
+                jugador8 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 300);
+                panelJugador8 = new PanelJugador1();
+                jugadores[6] = jugador8;
+                panelesJugadores[6] = panelJugador8;
+
+                jugador9 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 400);
+                panelJugador9 = new PanelJugador1();
+                jugadores[7] = jugador9;
+                panelesJugadores[7] = panelJugador9;
+
+                setAtributosaObjetos(8);
+                break;
         }
+
 
 
         panel.addMouseListener(this);
@@ -151,7 +205,7 @@ public class Ventana extends JFrame implements MouseListener{
 
 
 
-        gameLoopTimer = new Timer (30, new ActionListener(){
+        gameLoopTimer = new Timer (20, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
 
@@ -163,6 +217,12 @@ public class Ventana extends JFrame implements MouseListener{
                 if(cantidadDeJugadores == 3){
                     actualizarJuego(jugador6, panelJugador6);
                     actualizarJuego(jugador7, panelJugador7);
+                }
+                else if(cantidadDeJugadores == 4){
+                    actualizarJuego(jugador6, panelJugador6);
+                    actualizarJuego(jugador7, panelJugador7);
+                    actualizarJuego(jugador8, panelJugador8);
+                    actualizarJuego(jugador9, panelJugador9);
                 }
 
             }
@@ -182,6 +242,12 @@ public class Ventana extends JFrame implements MouseListener{
         if(cantidadDeJugadores == 3){
             colocarJugador(panelJugador6);
             colocarJugador(panelJugador7);
+        }
+        else if(cantidadDeJugadores == 4){
+            colocarJugador(panelJugador6);
+            colocarJugador(panelJugador7);
+            colocarJugador(panelJugador8);
+            colocarJugador(panelJugador9);
         }
 
     }
@@ -237,7 +303,7 @@ public class Ventana extends JFrame implements MouseListener{
                 generarDireccionMouse(x,y,jugador5);
             }
         }
-        if(cantidadDeJugadores == 3){
+        else if(cantidadDeJugadores == 3){
             if(contadorTurno % 2 != 0){
                 generarDireccionMouse(x,y,jugador2);
                 generarDireccionMouse(x,y,jugador3);
@@ -247,6 +313,20 @@ public class Ventana extends JFrame implements MouseListener{
                 generarDireccionMouse(x,y,jugador5);
                 generarDireccionMouse(x,y,jugador6);
                 generarDireccionMouse(x,y,jugador7);
+            }
+        }
+        else if(cantidadDeJugadores == 4){
+            if(contadorTurno % 2 != 0){
+                generarDireccionMouse(x,y,jugador2);
+                generarDireccionMouse(x,y,jugador3);
+                generarDireccionMouse(x,y,jugador4);
+                generarDireccionMouse(x,y,jugador5);
+            }
+            else if(contadorTurno % 2 == 0){
+                generarDireccionMouse(x,y,jugador6);
+                generarDireccionMouse(x,y,jugador7);
+                generarDireccionMouse(x,y,jugador8);
+                generarDireccionMouse(x,y,jugador9);
             }
         }
 
