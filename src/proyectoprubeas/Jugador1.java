@@ -7,7 +7,7 @@ public class Jugador1 {
     double y = 0;
     double velocidadX = 0;
     double velocidadY = 0;
-    double diametro = 50;
+    double diametro = 65;
 
 
     public Jugador1(double x, double y) {

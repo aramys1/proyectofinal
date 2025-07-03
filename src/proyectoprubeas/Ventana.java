@@ -80,22 +80,22 @@ public class Ventana extends JFrame implements MouseListener{
                 jugadores = new Jugador1[4];
                 panelesJugadores = new PanelJugador1[4];
                 //nuevo jugador
-                jugador2 = new Jugador1(100,100);
+                jugador2 = new Jugador1(100,200);
                 panelJugador2 = new PanelJugador1();
                 jugadores[0] = jugador2;
                 panelesJugadores[0] = panelJugador2;
 
-                jugador3 = new Jugador1(100,200);
+                jugador3 = new Jugador1(100,500);
                 panelJugador3 = new PanelJugador1();
                 jugadores[1] = jugador3;
                 panelesJugadores[1] = panelJugador3;
 
-                jugador4 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 100);
+                jugador4 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 200);
                 panelJugador4 = new PanelJugador1();
                 jugadores[2] = jugador4;
                 panelesJugadores[2] = panelJugador4;
 
-                jugador5 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 200);
+                jugador5 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 500);
                 panelJugador5 = new PanelJugador1();
                 jugadores[3] = jugador5;
                 panelesJugadores[3] = panelJugador5;
@@ -107,32 +107,32 @@ public class Ventana extends JFrame implements MouseListener{
                 jugadores = new Jugador1[6];
                 panelesJugadores = new PanelJugador1[6];
                 //nuevo jugador
-                jugador2 = new Jugador1(100,100);
+                jugador2 = new Jugador1(150,200-65);
                 panelJugador2 = new PanelJugador1();
                 jugadores[0] = jugador2;
                 panelesJugadores[0] = panelJugador2;
 
-                jugador3 = new Jugador1(100,200);
+                jugador3 = new Jugador1(150,600-65);
                 panelJugador3 = new PanelJugador1();
                 jugadores[1] = jugador3;
                 panelesJugadores[1] = panelJugador3;
 
-                jugador4 = new Jugador1(100,300);
+                jugador4 = new Jugador1(250,400-65);
                 panelJugador4 = new PanelJugador1();
                 jugadores[2] = jugador4;
                 panelesJugadores[2] = panelJugador4;
 
-                jugador5 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 100);
+                jugador5 = new Jugador1(Constantes.WIDTH_PANTALLA-205, 100);
                 panelJugador5 = new PanelJugador1();
                 jugadores[3] = jugador5;
                 panelesJugadores[3] = panelJugador5;
 
-                jugador6 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 200);
+                jugador6 = new Jugador1(Constantes.WIDTH_PANTALLA-205, 500);
                 panelJugador6 = new PanelJugador1();
                 jugadores[4] = jugador6;
                 panelesJugadores[4] = panelJugador6;
 
-                jugador7 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 300);
+                jugador7 = new Jugador1(Constantes.WIDTH_PANTALLA-305, 400-65);
                 panelJugador7 = new PanelJugador1();
                 jugadores[5] = jugador7;
                 panelesJugadores[5] = panelJugador7;
@@ -197,7 +197,7 @@ public class Ventana extends JFrame implements MouseListener{
 
         this.setResizable(false);
 
-        this.setBounds(0, 0, Constantes.WIDTH_PANTALLA, Constantes.HEIGHT_PANTALLA);
+        this.setBounds(0, 0, Constantes.WIDTH_PANTALLA+20, Constantes.HEIGHT_PANTALLA+20);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         iniciarComponentes();
@@ -205,7 +205,7 @@ public class Ventana extends JFrame implements MouseListener{
 
 
 
-        gameLoopTimer = new Timer (20, new ActionListener(){
+        gameLoopTimer = new Timer (30, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
 
@@ -334,7 +334,7 @@ public class Ventana extends JFrame implements MouseListener{
 
 
     public void generarDireccionMouse(double x, double y, Jugador1 jugador){
-        if(Math.abs(balon.getVelocidadX())< 0.5 && Math.abs(balon.getVelocidadY()) < 0.5){
+        if(Math.abs(balon.getVelocidadX())< 0.5 && Math.abs(balon.getVelocidadY()) < 0.5 && jugadoresDetenidos()){
             Rectangle jugadorBounds = jugador.getBounds();
             colision = 0;
             double mousePositionX = x;
@@ -357,8 +357,8 @@ public class Ventana extends JFrame implements MouseListener{
                 double hipotenusa = Math.sqrt(diferenciaMouseJugadorX*diferenciaMouseJugadorX + diferenciaMouseJugadorY*diferenciaMouseJugadorY);
 
                 if(hipotenusa >= 100){
-                    jugador.setVelocidadX(symbolX*40*Math.cos(anguloDeDireccion));
-                    jugador.setVelocidadY(symbolY*40*Math.sin(anguloDeDireccion));
+                    jugador.setVelocidadX(symbolX*60*Math.cos(anguloDeDireccion));
+                    jugador.setVelocidadY(symbolY*60*Math.sin(anguloDeDireccion));
                 }
                 else if(hipotenusa < 100){
                     jugador.setVelocidadX(symbolX*10*Math.cos(anguloDeDireccion));
@@ -511,6 +511,8 @@ public class Ventana extends JFrame implements MouseListener{
 
 
 
+
+
 //        if(colision == 1){
 //            double velocidadX = (jugador.getVelocidadX() * 0.89);
 //            double velocidadY = (jugador.getVelocidadY() * 0.89);
@@ -524,11 +526,11 @@ public class Ventana extends JFrame implements MouseListener{
 //
 //        }
 
-        jugador.setVelocidadX(jugador.getVelocidadX()*0.95);
-        jugador.setVelocidadY(jugador.getVelocidadY()*0.95);
+        jugador.setVelocidadX(jugador.getVelocidadX()*0.97);
+        jugador.setVelocidadY(jugador.getVelocidadY()*0.97);
 
-        balon.setVelocidadX(balon.getVelocidadX() * 0.97);
-        balon.setVelocidadY(balon.getVelocidadY() * 0.97);
+        balon.setVelocidadX(balon.getVelocidadX() * 0.985);
+        balon.setVelocidadY(balon.getVelocidadY() * 0.985);
 
 
         tecla = 0;
@@ -536,6 +538,15 @@ public class Ventana extends JFrame implements MouseListener{
         panelJugador.repaint();
         balon.moverBalon();
         pelota.repaint();
+    }
+
+    public Boolean jugadoresDetenidos(){
+        for(int i = 0; i<jugadores.length; i++){
+            if(jugadores[i].getVelocidadX() > 0.3 || jugadores[i].getVelocidadY() > 0.3){
+                return false;
+            }
+        }
+        return true;
     }
 
 }

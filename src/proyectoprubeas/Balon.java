@@ -4,11 +4,11 @@ import java.awt.*;
 
 public class Balon {
 
-    double x = 200;
-    double y = 200;
+    double x = 750-45;
+    double y = 400-45;
     double velocidadY = 0;
     double velocidadX = 0;
-    double diametro = 40;
+    double diametro = 45;
 
 
 
