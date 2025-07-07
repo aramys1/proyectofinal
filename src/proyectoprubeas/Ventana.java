@@ -26,7 +26,10 @@ public class Ventana extends JFrame implements MouseListener{
     public JPanel panel = new JPanel();
     PanelPelota pelota = new PanelPelota();
     Balon balon = new Balon();
+    JLabel marcadorLabel = new JLabel();
     Timer gameLoopTimer;
+    int golesAzul = 0;
+    int golesRojo = 0;
     PanelJugador1 panelJugador1 = new PanelJugador1();
     Jugador1 jugador1 = new Jugador1(300, 50);
     int keyPress = 0;
@@ -224,6 +227,16 @@ public class Ventana extends JFrame implements MouseListener{
         panelPorterias.setOpaque(false);
         panel.add(panelPorterias);
         panelPorterias.setBounds(0, 0, panel.getWidth(), panel.getHeight());
+
+        // Configurar marcador
+        marcadorLabel.setText("Azul: 0  |  Rojo: 0");
+        marcadorLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        marcadorLabel.setForeground(Color.WHITE);
+        marcadorLabel.setBounds(Constantes.WIDTH_PANTALLA / 2 - 100, 10, 300, 30);
+        marcadorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        panel.setLayout(null);  // ya lo tienes, por si acaso
+        panel.add(marcadorLabel);
+
 
 
 
@@ -563,15 +576,18 @@ public class Ventana extends JFrame implements MouseListener{
         balon.moverBalon();
         // Detección de gol
         if (porteriaIzquierda.balonEntra(balon.getBounds())) {
+            golesRojo++;
+            marcadorLabel.setText("Azul: " + golesAzul + "  |  Rojo: " + golesRojo);
             System.out.println("¡GOL DEL EQUIPO ROJO!");
             reiniciarPosiciones();
         }
 
         if (porteriaDerecha.balonEntra(balon.getBounds())) {
+            golesAzul++;
+            marcadorLabel.setText("Azul: " + golesAzul + "  |  Rojo: " + golesRojo);
             System.out.println("¡GOL DEL EQUIPO AZUL!");
             reiniciarPosiciones();
         }
-        pelota.repaint();
     }
 
     public Boolean jugadoresDetenidos(){
