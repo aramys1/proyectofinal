@@ -561,6 +561,16 @@ public class Ventana extends JFrame implements MouseListener{
         jugador.moverJugador();
         panelJugador.repaint();
         balon.moverBalon();
+        // Detección de gol
+        if (porteriaIzquierda.balonEntra(balon.getBounds())) {
+            System.out.println("¡GOL DEL EQUIPO ROJO!");
+            reiniciarPosiciones();
+        }
+
+        if (porteriaDerecha.balonEntra(balon.getBounds())) {
+            System.out.println("¡GOL DEL EQUIPO AZUL!");
+            reiniciarPosiciones();
+        }
         pelota.repaint();
     }
 
@@ -571,6 +581,56 @@ public class Ventana extends JFrame implements MouseListener{
             }
         }
         return true;
+    }
+    public void reiniciarPosiciones() {
+        // Reiniciar balón al centro
+        balon.setX(Constantes.WIDTH_PANTALLA / 2 - balon.getDiametro() / 2);
+        balon.setY(Constantes.HEIGHT_PANTALLA / 2 - balon.getDiametro() / 2);
+        balon.setVelocidadX(0);
+        balon.setVelocidadY(0);
+
+        // Reiniciar posiciones de jugadores según la cantidad
+        switch (cantidadDeJugadores) {
+            case 2:
+                jugador2.setX(100); jugador2.setY(200);
+                jugador3.setX(100); jugador3.setY(500);
+                jugador4.setX(Constantes.WIDTH_PANTALLA - 150); jugador4.setY(200);
+                jugador5.setX(Constantes.WIDTH_PANTALLA - 150); jugador5.setY(500);
+                break;
+
+            case 3:
+                jugador2.setX(150); jugador2.setY(135);
+                jugador3.setX(150); jugador3.setY(535);
+                jugador4.setX(250); jugador4.setY(335);
+                jugador5.setX(Constantes.WIDTH_PANTALLA - 205); jugador5.setY(100);
+                jugador6.setX(Constantes.WIDTH_PANTALLA - 205); jugador6.setY(500);
+                jugador7.setX(Constantes.WIDTH_PANTALLA - 305); jugador7.setY(335);
+                break;
+
+            case 4:
+                jugador2.setX(100); jugador2.setY(100);
+                jugador3.setX(100); jugador3.setY(200);
+                jugador4.setX(100); jugador4.setY(300);
+                jugador5.setX(100); jugador5.setY(400);
+                jugador6.setX(Constantes.WIDTH_PANTALLA - 150); jugador6.setY(100);
+                jugador7.setX(Constantes.WIDTH_PANTALLA - 150); jugador7.setY(200);
+                jugador8.setX(Constantes.WIDTH_PANTALLA - 150); jugador8.setY(300);
+                jugador9.setX(Constantes.WIDTH_PANTALLA - 150); jugador9.setY(400);
+                break;
+        }
+
+        // Detener movimiento de jugadores
+        for (Jugador1 jugador : jugadores) {
+            jugador.setVelocidadX(0);
+            jugador.setVelocidadY(0);
+        }
+
+        // Redibujar todo
+        pelota.repaint();
+        for (PanelJugador1 panelJugador : panelesJugadores) {
+            panelJugador.repaint();
+        }
+        panelPorterias.repaint();
     }
 
 }
