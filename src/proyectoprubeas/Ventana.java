@@ -29,6 +29,8 @@ public class Ventana extends JFrame implements MouseListener{
     JLabel marcadorLabel = new JLabel();
     boolean juegoPausado = false;
     boolean golEnProceso = false;
+    int golesParaGanar = 3;
+
     Timer gameLoopTimer;
     int golesAzul = 0;
     int golesRojo = 0;
@@ -585,7 +587,7 @@ public class Ventana extends JFrame implements MouseListener{
             golesRojo++;
             marcadorLabel.setText("Azul: " + golesAzul + "  |  Rojo: " + golesRojo);
             System.out.println("¡GOL DEL EQUIPO ROJO!");
-            if (golesRojo >= 3) {
+            if (golesRojo >= golesParaGanar) {
                 terminarJuego("Rojo");
                 return;
             }
@@ -608,7 +610,7 @@ public class Ventana extends JFrame implements MouseListener{
             marcadorLabel.setText("Azul: " + golesAzul + "  |  Rojo: " + golesRojo);
             System.out.println("¡GOL DEL EQUIPO AZUL!");
             juegoPausado = true;
-            if (golesAzul >= 3) {
+            if (golesAzul >= golesParaGanar) {
                 terminarJuego("Azul");
                 return;
             }
