@@ -687,10 +687,28 @@ public class Ventana extends JFrame implements MouseListener{
 
     public void terminarJuego(String equipoGanador) {
         juegoPausado = true;
-        gameLoopTimer.stop(); 
-        JOptionPane.showMessageDialog(this, "¡Ganó el equipo " + equipoGanador + "!", "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
-        System.exit(0);
+        gameLoopTimer.stop();
+
+        int opcion = JOptionPane.showOptionDialog(
+            this,
+            "¡Ganó el equipo " + equipoGanador + "!\n¿Qué deseas hacer?",
+            "Fin del juego",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.INFORMATION_MESSAGE,
+            null,
+            new String[]{"Jugar otra vez", "Salir"},
+            "Jugar otra vez"
+        );
+
+        if (opcion == JOptionPane.YES_OPTION) {
+            this.dispose(); 
+            Main.main(null); 
+        } else {
+            System.exit(0); 
+        }
     }
+
+
 
 
 }
