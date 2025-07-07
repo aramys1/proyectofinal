@@ -222,8 +222,8 @@ public class Ventana extends JFrame implements MouseListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         iniciarComponentes();
         // Crear porterías
-        int ancho = 20;
-        int alto = 200;
+        int ancho = 60;
+        int alto = 300;
         porteriaIzquierda = new Porteria(0, Constantes.HEIGHT_PANTALLA / 2 - alto / 2, ancho, alto);
         porteriaDerecha = new Porteria(Constantes.WIDTH_PANTALLA - ancho, Constantes.HEIGHT_PANTALLA / 2 - alto / 2, ancho, alto);
 
