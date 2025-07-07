@@ -27,6 +27,8 @@ public class Ventana extends JFrame implements MouseListener{
     PanelPelota pelota = new PanelPelota();
     Balon balon = new Balon();
     JLabel marcadorLabel = new JLabel();
+    boolean juegoPausado = false;
+    boolean golEnProceso = false;
     Timer gameLoopTimer;
     int golesAzul = 0;
     int golesRojo = 0;
@@ -571,23 +573,57 @@ public class Ventana extends JFrame implements MouseListener{
 
 
         tecla = 0;
-        jugador.moverJugador();
-        panelJugador.repaint();
-        balon.moverBalon();
+        if (!juegoPausado) {
+            jugador.moverJugador();
+            panelJugador.repaint();
+            balon.moverBalon();
+            pelota.repaint(); 
+        }
         // Detección de gol
-        if (porteriaIzquierda.balonEntra(balon.getBounds())) {
+        if (!golEnProceso && porteriaIzquierda.balonEntra(balon.getBounds())) {
+            golEnProceso = true;
             golesRojo++;
             marcadorLabel.setText("Azul: " + golesAzul + "  |  Rojo: " + golesRojo);
             System.out.println("¡GOL DEL EQUIPO ROJO!");
-            reiniciarPosiciones();
+            if (golesRojo >= 3) {
+                terminarJuego("Rojo");
+                return;
+            }
+            juegoPausado = true;
+
+            new Timer(2000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    reiniciarPosiciones();
+                    juegoPausado = false;
+                    golEnProceso = false;
+                    ((Timer) evt.getSource()).stop();
+                }
+            }).start();
         }
 
-        if (porteriaDerecha.balonEntra(balon.getBounds())) {
+        if (!golEnProceso && porteriaDerecha.balonEntra(balon.getBounds())) {
+            golEnProceso = true;
             golesAzul++;
             marcadorLabel.setText("Azul: " + golesAzul + "  |  Rojo: " + golesRojo);
             System.out.println("¡GOL DEL EQUIPO AZUL!");
-            reiniciarPosiciones();
+            juegoPausado = true;
+            if (golesAzul >= 3) {
+                terminarJuego("Azul");
+                return;
+            }
+            new Timer(2000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    reiniciarPosiciones();
+                    juegoPausado = false;
+                    golEnProceso = false;
+                    ((Timer) evt.getSource()).stop();
+                }
+            }).start();
         }
+
+        
     }
 
     public Boolean jugadoresDetenidos(){
@@ -648,6 +684,14 @@ public class Ventana extends JFrame implements MouseListener{
         }
         panelPorterias.repaint();
     }
+
+    public void terminarJuego(String equipoGanador) {
+        juegoPausado = true;
+        gameLoopTimer.stop(); 
+        JOptionPane.showMessageDialog(this, "¡Ganó el equipo " + equipoGanador + "!", "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
+    }
+
 
 }
 
