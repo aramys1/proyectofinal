@@ -10,6 +10,19 @@ import java.io.InputStreamReader;
 public class Ventana extends JFrame implements MouseListener{
     BufferedReader bufer = new BufferedReader(new InputStreamReader(System.in));
     int tecla = 0;
+    Porteria porteriaIzquierda;
+    Porteria porteriaDerecha;
+
+    JPanel panelPorterias = new JPanel() {
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (porteriaIzquierda != null && porteriaDerecha != null) {
+                porteriaIzquierda.dibujar(g);
+                porteriaDerecha.dibujar(g);
+            }
+        }
+    };
     public JPanel panel = new JPanel();
     PanelPelota pelota = new PanelPelota();
     Balon balon = new Balon();
@@ -201,6 +214,17 @@ public class Ventana extends JFrame implements MouseListener{
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         iniciarComponentes();
+        // Crear porterías
+        int ancho = 20;
+        int alto = 200;
+        porteriaIzquierda = new Porteria(0, Constantes.HEIGHT_PANTALLA / 2 - alto / 2, ancho, alto);
+        porteriaDerecha = new Porteria(Constantes.WIDTH_PANTALLA - ancho, Constantes.HEIGHT_PANTALLA / 2 - alto / 2, ancho, alto);
+
+        // Panel para dibujar porterías
+        panelPorterias.setOpaque(false);
+        panel.add(panelPorterias);
+        panelPorterias.setBounds(0, 0, panel.getWidth(), panel.getHeight());
+
 
 
 
