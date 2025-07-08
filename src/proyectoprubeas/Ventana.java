@@ -356,20 +356,6 @@ public class Ventana extends JFrame implements MouseListener{
                 generarDireccionMouse(x,y,jugador7);
             }
         }
-        else if(cantidadDeJugadores == 4){
-            if(contadorTurno % 2 != 0){
-                generarDireccionMouse(x,y,jugador2);
-                generarDireccionMouse(x,y,jugador3);
-                generarDireccionMouse(x,y,jugador4);
-                generarDireccionMouse(x,y,jugador5);
-            }
-            else if(contadorTurno % 2 == 0){
-                generarDireccionMouse(x,y,jugador6);
-                generarDireccionMouse(x,y,jugador7);
-                generarDireccionMouse(x,y,jugador8);
-                generarDireccionMouse(x,y,jugador9);
-            }
-        }
 
     }
 
@@ -397,11 +383,27 @@ public class Ventana extends JFrame implements MouseListener{
                 double anguloDeDireccion = Math.atan(diferenciaMouseJugadorY/diferenciaMouseJugadorX);
                 double hipotenusa = Math.sqrt(diferenciaMouseJugadorX*diferenciaMouseJugadorX + diferenciaMouseJugadorY*diferenciaMouseJugadorY);
 
-                if(hipotenusa >= 100){
+                if(hipotenusa >= 20 && hipotenusa < 40){
+                    jugador.setVelocidadX(symbolX*20*Math.cos(anguloDeDireccion));
+                    jugador.setVelocidadY(symbolY*20*Math.sin(anguloDeDireccion));
+                }
+                else if(hipotenusa >= 40 && hipotenusa < 60){
+                    jugador.setVelocidadX(symbolX*40*Math.cos(anguloDeDireccion));
+                    jugador.setVelocidadY(symbolY*40*Math.sin(anguloDeDireccion));
+                }
+                else if(hipotenusa >= 60 && hipotenusa < 80){
                     jugador.setVelocidadX(symbolX*60*Math.cos(anguloDeDireccion));
                     jugador.setVelocidadY(symbolY*60*Math.sin(anguloDeDireccion));
                 }
-                else if(hipotenusa < 100){
+                else if(hipotenusa >= 80 && hipotenusa < 100){
+                    jugador.setVelocidadX(symbolX*80*Math.cos(anguloDeDireccion));
+                    jugador.setVelocidadY(symbolY*80*Math.sin(anguloDeDireccion));
+                }
+                else if(hipotenusa >= 100){
+                    jugador.setVelocidadX(symbolX*100*Math.cos(anguloDeDireccion));
+                    jugador.setVelocidadY(symbolY*100*Math.sin(anguloDeDireccion));
+                }
+                else{
                     jugador.setVelocidadX(symbolX*10*Math.cos(anguloDeDireccion));
                     jugador.setVelocidadY(symbolY*10*Math.sin(anguloDeDireccion));
                 }
@@ -567,8 +569,8 @@ public class Ventana extends JFrame implements MouseListener{
 //
 //        }
 
-        jugador.setVelocidadX(jugador.getVelocidadX()*0.97);
-        jugador.setVelocidadY(jugador.getVelocidadY()*0.97);
+        jugador.setVelocidadX(jugador.getVelocidadX()*0.84);
+        jugador.setVelocidadY(jugador.getVelocidadY()*0.84);
 
         balon.setVelocidadX(balon.getVelocidadX() * 0.985);
         balon.setVelocidadY(balon.getVelocidadY() * 0.985);
