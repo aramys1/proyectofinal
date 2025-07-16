@@ -437,10 +437,21 @@ public class Ventana extends JFrame implements MouseListener{
 
             if(Math.abs(balon.getVelocidadX()) < 0.1 && Math.abs(balon.getVelocidadY()) < 0.1){
                 System.out.println("el jugador golpea");
-                balon.setVelocidadX(jugador.getVelocidadX());
-                balon.setVelocidadY(jugador.getVelocidadY());
-                jugador.setVelocidadY(-0.90*jugador.getVelocidadY());
-                jugador.setVelocidadX(-0.90*jugador.getVelocidadX());
+
+                //pruebas
+                double dx = balon.getX() - jugador.getX();
+                double dy = balon.getY() - jugador.getY();
+                double hipotenusa = Math.sqrt(dx*dx + dy*dy);
+
+                double nx = dx / hipotenusa;
+                double ny = dy / hipotenusa;
+
+                double dot = jugador.getVelocidadX() * nx + jugador.getVelocidadY() * ny;
+
+                jugador.setVelocidadX(jugador.getVelocidadX() * 0.5);
+                jugador.setVelocidadY(jugador.getVelocidadY() * 0.5);
+                balon.setVelocidadX(nx * dot * 0.8);
+                balon.setVelocidadY(ny * dot * 0.8);
 
                 if(jugador.getX() > balon.getX()){
                     System.out.println("redibujado");
@@ -467,10 +478,19 @@ public class Ventana extends JFrame implements MouseListener{
             }
             else{
                 System.out.println("el balon golpea");
-                jugador.setVelocidadX(balon.getVelocidadX());
-                jugador.setVelocidadY(balon.getVelocidadY());
-                balon.setVelocidadX(-1*balon.getVelocidadX());
-                balon.setVelocidadY(-1*balon.getVelocidadY());
+                double dx = balon.getX() - jugador.getX();
+                double dy = balon.getY() - jugador.getY();
+                double hipotenusa = Math.sqrt(dx*dx + dy*dy);
+
+                double nx = dx / hipotenusa;
+                double ny = dy / hipotenusa;
+
+                double dot = jugador.getVelocidadX() * nx + jugador.getVelocidadY() * ny;
+
+                jugador.setVelocidadX(nx * dot);
+                jugador.setVelocidadY(ny * dot);
+                balon.setVelocidadX(balon.getVelocidadX() * 0.5);
+                balon.setVelocidadY(balon.getVelocidadY() * 0.5);
 
 
                 if(jugador.getX() > balon.getX()){
