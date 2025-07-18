@@ -74,11 +74,14 @@ public class Ventana extends JFrame implements MouseListener{
         for(int i = 0; i < cantidadJugadores; i++){
             panelesJugadores[i].setJugador1(jugadores[i]);
             if( i < cantidadJugadores/2){
-                panelesJugadores[i].setColor(Color.blue);
+
+                panelesJugadores[i].setImagen(panelesJugadores[i].getImagenEquipo1());
             }
             else if(i >= cantidadJugadores/2){
-                panelesJugadores[i].setColor(Color.red);
+
+                panelesJugadores[i].setImagen(panelesJugadores[i].getImagenEquipo2());
             }
+            panelesJugadores[i].repaint();
         }
 
     }
