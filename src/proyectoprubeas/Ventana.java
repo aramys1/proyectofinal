@@ -93,6 +93,7 @@ public class Ventana extends JFrame implements MouseListener{
         try{
             System.out.println("Cantidad de jugadores 2, 3, 4");
             cantidadDeJugadores = Integer.parseInt(bufer.readLine());
+
         }
         catch (IOException e){
             System.out.println(e.getMessage());
@@ -212,7 +213,6 @@ public class Ventana extends JFrame implements MouseListener{
         }
 
 
-
         panel.addMouseListener(this);
         pelota.setBalon(balon);
 
@@ -236,13 +236,30 @@ public class Ventana extends JFrame implements MouseListener{
         panelPorterias.setBounds(0, 0, panel.getWidth(), panel.getHeight());
 
         // Configurar marcador
-        marcadorLabel.setText("Azul: 0  |  Rojo: 0");
+        marcadorLabel.setText("Azul: 0     Rojo: 0");
         marcadorLabel.setFont(new Font("Arial", Font.BOLD, 24));
         marcadorLabel.setForeground(Color.WHITE);
-        marcadorLabel.setBounds(Constantes.WIDTH_PANTALLA / 2 - 100, 10, 300, 30);
+        marcadorLabel.setBounds(Constantes.WIDTH_PANTALLA / 2 - 150, 10, 300, 50);
         marcadorLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        panel.setLayout(null);  // ya lo tienes, por si acaso
-        panel.add(marcadorLabel);
+
+        JPanel marcadorPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setColor(new Color(0, 0, 0, 150));
+                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30);
+                g2.dispose();
+                super.paintComponent(g);
+            }
+        };
+        marcadorPanel.setLayout(new BorderLayout());
+        marcadorPanel.setBounds(marcadorLabel.getBounds());
+        marcadorPanel.add(marcadorLabel);
+        marcadorPanel.setOpaque(false);
+
+        panel.add(marcadorPanel);
+        //panel.setLayout(null);  // ya lo tienes, por si las moscas
+        //panel.add(marcadorLabel);
 
 
 
@@ -276,6 +293,7 @@ public class Ventana extends JFrame implements MouseListener{
     }
 
     public void iniciarComponentes(){
+
         colocarPanel();
         colocarPelota();
 
@@ -293,16 +311,23 @@ public class Ventana extends JFrame implements MouseListener{
             colocarJugador(panelJugador8);
             colocarJugador(panelJugador9);
         }
+        colocarCampo();
 
     }
+
+
 
     public void colocarPanel(){
 
+
         panel.setLayout(null);
-        panel.setBackground(Color.gray);
+        panel.setBackground(new Color(34,139,34));
         this.getContentPane().add(panel);
         panel.setBounds(0,0,Constantes.WIDTH_PANTALLA, Constantes.HEIGHT_PANTALLA);
+
+
     }
+
 
     public void colocarPelota(){
         panel.add(pelota);
@@ -315,6 +340,12 @@ public class Ventana extends JFrame implements MouseListener{
         panelJugador.setBounds(0,0,panel.getWidth(), panel.getHeight());
     }
 
+    public void colocarCampo() {
+        CampoFutbol campo = new CampoFutbol();
+        campo.setOpaque(false);
+        campo.setBounds(0, 0, Constantes.WIDTH_PANTALLA, Constantes.HEIGHT_PANTALLA);
+        panel.add(campo);
+    }
 
     //variables para mouse
     double mouseXInicial = 0;
@@ -632,7 +663,7 @@ public class Ventana extends JFrame implements MouseListener{
         if (!golEnProceso && porteriaDerecha.balonEntra(balon.getBounds())) {
             golEnProceso = true;
             golesAzul++;
-            marcadorLabel.setText("Azul: " + golesAzul + "  |  Rojo: " + golesRojo);
+            marcadorLabel.setText("Azul: " + golesAzul + "     Rojo: " + golesRojo);
             System.out.println("¡GOL DEL EQUIPO AZUL!");
             juegoPausado = true;
             if (golesAzul >= golesParaGanar) {
