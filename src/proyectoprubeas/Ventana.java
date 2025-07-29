@@ -32,7 +32,7 @@ public class Ventana extends JFrame implements MouseListener{
 
     public JPanel panel = new JPanel();
     PanelPelota pelota = new PanelPelota();
-    Balon balon = new Balon();
+    Balon balon = new Balon(sonidos);
     JLabel marcadorLabel = new JLabel();
     boolean juegoPausado = false;
     boolean golEnProceso = false;
