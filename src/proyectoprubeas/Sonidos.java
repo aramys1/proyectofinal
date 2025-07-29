@@ -11,6 +11,7 @@ public class Sonidos {
     public Sonidos() {
     }
 
+    //Metodo que reproduce el sonido
     public static void reproducirSonido(String ruta) {
         try {
             File archivo = new File(ruta);

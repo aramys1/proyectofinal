@@ -8,7 +8,6 @@ public class PanelJugador1 extends JPanel {
     Color color;
     private Image imagen;
     private Image imagen2;
-    private boolean seleccionado = false;
     public PanelJugador1(){
         this.setOpaque(false);
         imagen = new ImageIcon(getClass().getResource("/panama.png")).getImage();

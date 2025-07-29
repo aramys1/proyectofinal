@@ -26,18 +26,18 @@ public class Balon {
         y = y + velocidadY;
 
         if (x < 0) {
-            sonido.reproducirSonido("sonidoparedmodificado.wav");
-            x = 0; // Ajustar posición para que no se salga
-            velocidadX *= -1; // Invertir dirección X
+            sonido.reproducirSonido("/RecursosDeSonido/sonidoparedmodificado.wav");
+            x = 0;
+            velocidadX *= -1;
             System.out.println("Jugador golpeó pared izquierda y rebotó!");
             velocidadX = velocidadX * 0.7;
             velocidadY = velocidadY * 0.7;
 
 
         } else if (x + diametro > Constantes.WIDTH_PANTALLA) {
-            sonido.reproducirSonido("sonidoparedmodificado.wav");
-            x = Constantes.WIDTH_PANTALLA - diametro; // Ajustar posición
-            velocidadX *= -1; // Invertir dirección X
+            sonido.reproducirSonido("/RecursosDeSonido/sonidoparedmodificado.wav");
+            x = Constantes.WIDTH_PANTALLA - diametro;
+            velocidadX *= -1;
             System.out.println("Jugador golpeó pared derecha y rebotó!");
             velocidadX = velocidadX * 0.7;
             velocidadY = velocidadY * 0.7;
@@ -46,17 +46,17 @@ public class Balon {
 
         // Comprobar colisión con bordes verticales y rebotar
         if (y < 0) {
-            sonido.reproducirSonido("sonidoparedmodificado.wav");
-            y = 0; // Ajustar posición
-            velocidadY *= -1; // Invertir dirección Y
+            sonido.reproducirSonido("/RecursosDeSonido/sonidoparedmodificado.wav");
+            y = 0;
+            velocidadY *= -1;
             System.out.println("Jugador golpeó pared superior y rebotó!");
             velocidadX = velocidadX * 0.7;
             velocidadY = velocidadY * 0.7;
 
         } else if (y + diametro > Constantes.HEIGHT_PANTALLA) {
-            sonido.reproducirSonido("sonidoparedmodificado.wav");
-            y = Constantes.HEIGHT_PANTALLA - diametro; // Ajustar posición
-            velocidadY *= -1; // Invertir dirección Y
+            sonido.reproducirSonido("/RecursosDeSonido/sonidoparedmodificado.wav");
+            y = Constantes.HEIGHT_PANTALLA - diametro;
+            velocidadY *= -1;
             System.out.println("Jugador golpeó pared inferior y rebotó!");
             velocidadX = velocidadX * 0.7;
             velocidadY = velocidadY * 0.7;

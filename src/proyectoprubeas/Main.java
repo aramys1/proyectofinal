@@ -8,7 +8,5 @@ public class Main {
             Ventana ventana = new Ventana();
             ventana.setVisible(true);
         });
-        //hola mundo
     }
-
 }
