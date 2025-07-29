@@ -10,7 +10,7 @@ public class Main {
 
         frame.setContentPane(presentacion.getPanel());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(938, 938);
+        frame.setSize(938, 800);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
