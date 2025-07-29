@@ -3,11 +3,11 @@ package proyectoprubeas;
 import java.awt.*;
 
 public class Jugador1 {
-    double x = 0;
-    double y = 0;
-    double velocidadX = 0;
-    double velocidadY = 0;
-    double diametro = 65;
+    private double x = 0;
+    private double y = 0;
+    private double velocidadX = 0;
+    private double velocidadY = 0;
+    private double diametro = 65;
     Sonidos sonido = new Sonidos();
 
 

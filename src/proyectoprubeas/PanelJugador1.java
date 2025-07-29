@@ -18,9 +18,6 @@ public class PanelJugador1 extends JPanel {
     public void setJugador1(Jugador1 jugador1){
         this.jugador1 = jugador1;
     }
-    public void setColor(Color color){
-        this.color = color;
-    }
 
     public Image getImagenEquipo1(){
         return imagen;

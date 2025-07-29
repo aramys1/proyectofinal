@@ -3,10 +3,10 @@ package proyectoprubeas;
 import javax.swing.*;
 import java.awt.*;
 
-public class PanelConimagenes extends JPanel {
+public class PanelConImagenes extends JPanel {
     private Image imagen;
 
-    public PanelConimagenes(String ruta) {
+    public PanelConImagenes(String ruta) {
         this.imagen = new ImageIcon(ruta).getImage();
         setOpaque(false);
 

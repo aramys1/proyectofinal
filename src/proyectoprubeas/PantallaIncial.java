@@ -10,7 +10,7 @@ public class PantallaIncial {
 
     public PantallaIncial(JFrame frame){
         sonido.reproducirSonido("/RecursosDeSonido/EstadioAmbiente.wav", true);
-        PantallaIncial = new PanelConimagenes("recursos/Fondo.png");
+        PantallaIncial = new PanelConImagenes("recursos/Fondo.png");
 
         // Botón encima del fondo
         jugarButton = new JButton("Jugar") {

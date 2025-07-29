@@ -4,11 +4,11 @@ import java.awt.*;
 
 public class Balon {
 
-    double x = 750-45;
-    double y = 400-45;
-    double velocidadY = 0;
-    double velocidadX = 0;
-    double diametro = 55;
+    private double x = 750-45;
+    private double y = 400-45;
+    private double velocidadY = 0;
+    private double velocidadX = 0;
+    private double diametro = 55;
     Sonidos sonido;
 
 
@@ -107,7 +107,4 @@ public class Balon {
         return diametro;
     }
 
-    public void setDiametro(double diametro) {
-        this.diametro = diametro;
-    }
 }
