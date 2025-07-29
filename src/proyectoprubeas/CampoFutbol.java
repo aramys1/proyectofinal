@@ -5,6 +5,8 @@ import java.awt.*;
 
 public class CampoFutbol extends JPanel {
 
+    private Image fondo = new ImageIcon(getClass().getResource("/Oficial.png")).getImage();
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -15,6 +17,9 @@ public class CampoFutbol extends JPanel {
 
         int w = getWidth();
         int h = getHeight();
+
+        g.drawImage(fondo, 0, 0, w, h, this);
+
 
         // Líneas del campo
         g2.drawLine(w / 2, 0, w / 2,  h); // Línea central

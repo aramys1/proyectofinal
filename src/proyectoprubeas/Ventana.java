@@ -23,17 +23,10 @@ public class Ventana extends JFrame implements MouseListener{
             }
         }
     };
-
-    //objeto para el sonido
-    Sonidos sonidos = new Sonidos();
-
-
     public JPanel panel = new JPanel();
     PanelPelota pelota = new PanelPelota();
-    Balon balon = new Balon(sonidos);
+    Balon balon = new Balon(new Sonidos());
     JLabel marcadorLabel = new JLabel();
-
-
     boolean juegoPausado = false;
     boolean golEnProceso = false;
     int golesParaGanar = 3;
@@ -46,6 +39,7 @@ public class Ventana extends JFrame implements MouseListener{
     int keyPress = 0;
     int colision = 0;
 
+    int cantidadJugadores = 2;
 
     //objetos de jugadores
     Jugador1 jugador2;
@@ -72,11 +66,10 @@ public class Ventana extends JFrame implements MouseListener{
     Jugador1 jugador9;
     PanelJugador1 panelJugador9;
 
-    //arreglo de objetos de jugadores
+    //arreglo de objetos
     Jugador1[] jugadores;
     PanelJugador1[] panelesJugadores;
 
-    //Este metodo pasa la instancia de los jugadores a los paneles de los jugadores
     void setAtributosaObjetos(int cantidadJugadores){
         for(int i = 0; i < cantidadJugadores; i++){
             panelesJugadores[i].setJugador1(jugadores[i]);
@@ -95,17 +88,10 @@ public class Ventana extends JFrame implements MouseListener{
 
 
     int cantidadDeJugadores = 0;
-
     public Ventana(){
         System.out.println(Constantes.WIDTH_PANTALLA);
-        try{
-            System.out.println("Cantidad de jugadores 2, 3, 4");
-            cantidadDeJugadores = Integer.parseInt(bufer.readLine());
-
-        }
-        catch (IOException e){
-            System.out.println(e.getMessage());
-        }
+        cantidadDeJugadores = Configuracion.cantidadDeJugadores;
+        System.out.println("Cantidad de jugadores seleccionada: " + cantidadDeJugadores);
 
         switch (cantidadDeJugadores){
             case 2:
@@ -266,6 +252,12 @@ public class Ventana extends JFrame implements MouseListener{
         marcadorPanel.setOpaque(false);
 
         panel.add(marcadorPanel);
+        //panel.setLayout(null);  // ya lo tienes, por si las moscas
+        //panel.add(marcadorLabel);
+
+
+
+
 
 
         gameLoopTimer = new Timer (30, new ActionListener(){
@@ -294,7 +286,6 @@ public class Ventana extends JFrame implements MouseListener{
 
     }
 
-    //Este metodo llama a otros metodos que colocan los paneles de los diferentes componentes en la ventana
     public void iniciarComponentes(){
 
         colocarPanel();
@@ -397,7 +388,6 @@ public class Ventana extends JFrame implements MouseListener{
     }
 
 
-    //Este metodo calcula la direccion en que apunta el jugador y establece la velocidad que la ficha va a tener
     public void generarDireccionMouse(double x, double y, Jugador1 jugador){
         if(Math.abs(balon.getVelocidadX())< 0.5 && Math.abs(balon.getVelocidadY()) < 0.5 && jugadoresDetenidos()){
             Rectangle jugadorBounds = jugador.getBounds();
@@ -460,7 +450,7 @@ public class Ventana extends JFrame implements MouseListener{
     public void mouseExited(MouseEvent e) {
 
     }
-    //Esto es lo que pasa dentro del bucle, colisiones y movimiento
+
     public void actualizarJuego(Jugador1 jugador, PanelJugador1 panelJugador){
         Rectangle boundsBalon = balon.getBounds();
         Rectangle boundsJugador1 = jugador.getBounds();
@@ -475,7 +465,6 @@ public class Ventana extends JFrame implements MouseListener{
 
             if(Math.abs(balon.getVelocidadX()) < 0.1 && Math.abs(balon.getVelocidadY()) < 0.1){
                 System.out.println("el jugador golpea");
-                sonidos.reproducirSonido("/RecursosDeSonido/GolpeDeBalon.wav");
 
                 //pruebas
                 double dx = balon.getX() - jugador.getX();
@@ -517,7 +506,6 @@ public class Ventana extends JFrame implements MouseListener{
             }
             else{
                 System.out.println("el balon golpea");
-                sonidos.reproducirSonido("/RecursosDeSonido/GolpeDeBalon.wav");
                 double dx = balon.getX() - jugador.getX();
                 double dy = balon.getY() - jugador.getY();
                 double hipotenusa = Math.sqrt(dx*dx + dy*dy);
@@ -613,6 +601,22 @@ public class Ventana extends JFrame implements MouseListener{
 
 
 
+
+
+
+//        if(colision == 1){
+//            double velocidadX = (jugador.getVelocidadX() * 0.89);
+//            double velocidadY = (jugador.getVelocidadY() * 0.89);
+//
+//
+//            jugador.setVelocidadX(velocidadX);
+//            jugador.setVelocidadY(velocidadY);
+//
+//            balon.setVelocidadX(balon.getVelocidadX() * 0.99);
+//            balon.setVelocidadY(balon.getVelocidadY() * 0.99);
+//
+//        }
+
         jugador.setVelocidadX(jugador.getVelocidadX()*0.84);
         jugador.setVelocidadY(jugador.getVelocidadY()*0.84);
 
@@ -674,8 +678,6 @@ public class Ventana extends JFrame implements MouseListener{
         
     }
 
-
-    //funcion que comprueba que los jugadores esten completamente detenidos
     public Boolean jugadoresDetenidos(){
         for(int i = 0; i<jugadores.length; i++){
             if(jugadores[i].getVelocidadX() > 0.3 || jugadores[i].getVelocidadY() > 0.3){
@@ -684,9 +686,6 @@ public class Ventana extends JFrame implements MouseListener{
         }
         return true;
     }
-
-
-    //Funcion que reinicia la posicion de los jugadores
     public void reiniciarPosiciones() {
         // Reiniciar balón al centro
         balon.setX(Constantes.WIDTH_PANTALLA / 2 - balon.getDiametro() / 2);
