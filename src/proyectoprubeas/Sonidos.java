@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Sonidos {
-    private static Clip clip;
+    private Clip clip;
     public Sonidos() {
     }
 
     //Metodo que reproduce el sonido
-    public static void reproducirSonido(String ruta, boolean enLoop) {
+    public void reproducirSonido(String ruta, boolean enLoop) {
         try {
             File archivo = new File(ruta);
             InputStream inputStream = Sonidos.class.getResourceAsStream(ruta);
@@ -35,7 +35,7 @@ public class Sonidos {
             e.printStackTrace();
         }
     }
-    public static void detenerSonido() {
+    public void detenerSonido() {
         if (clip != null && clip.isRunning()) {
             clip.stop();
             clip.close();

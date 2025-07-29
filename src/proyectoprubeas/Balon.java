@@ -14,7 +14,7 @@ public class Balon {
 
 
     public Balon(Sonidos sonido){
-
+        this.sonido = sonido;
     }
 
     //metodo que mueve el balon

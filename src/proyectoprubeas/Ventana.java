@@ -34,6 +34,7 @@ public class Ventana extends JFrame implements MouseListener{
 
     //objetos para sonidos
     Sonidos sonido = new Sonidos();
+    Sonidos sonido1 = new Sonidos();
 
     Timer gameLoopTimer;
     int golesAzul = 0;
@@ -291,7 +292,7 @@ public class Ventana extends JFrame implements MouseListener{
     }
 
     public void iniciarComponentes(){
-        sonido.reproducirSonido("/RecursosDeSonido/EstadioAmbiente.wav", true);
+        sonido1.reproducirSonido("/RecursosDeSonido/EstadioAmbiente.wav", true);
         colocarPanel();
         colocarPelota();
 
@@ -759,9 +760,11 @@ public class Ventana extends JFrame implements MouseListener{
         );
 
         if (opcion == JOptionPane.YES_OPTION) {
+            sonido1.detenerSonido();
             this.dispose(); 
             Main.main(null); 
         } else {
+            sonido1.detenerSonido();
             System.exit(0); 
         }
     }
