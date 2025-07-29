@@ -8,12 +8,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Ventana extends JFrame implements MouseListener{
-    BufferedReader bufer = new BufferedReader(new InputStreamReader(System.in));
-    int tecla = 0;
+
+    //objetos para las porterias
     Porteria porteriaIzquierda;
     Porteria porteriaDerecha;
 
-    JPanel panelPorterias = new JPanel() {
+    //paneles
+    private JPanel panelPorterias = new JPanel() {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -23,13 +24,15 @@ public class Ventana extends JFrame implements MouseListener{
             }
         }
     };
-    public JPanel panel = new JPanel();
+    JPanel panel = new JPanel();
     PanelPelota pelota = new PanelPelota();
+
+
     Balon balon = new Balon(new Sonidos());
-    JLabel marcadorLabel = new JLabel();
-    boolean juegoPausado = false;
-    boolean golEnProceso = false;
-    int golesParaGanar = 3;
+    private JLabel marcadorLabel = new JLabel();
+    private boolean juegoPausado = false;
+    private boolean golEnProceso = false;
+    private int golesParaGanar = 3;
 
 
     //objetos para sonidos
@@ -37,14 +40,10 @@ public class Ventana extends JFrame implements MouseListener{
     Sonidos sonido1 = new Sonidos();
 
     Timer gameLoopTimer;
-    int golesAzul = 0;
-    int golesRojo = 0;
-    PanelJugador1 panelJugador1 = new PanelJugador1();
-    Jugador1 jugador1 = new Jugador1(300, 50);
-    int keyPress = 0;
-    int colision = 0;
+    private int golesAzul = 0;
+    private int golesRojo = 0;
 
-    int cantidadJugadores = 2;
+
 
     //objetos de jugadores
     Jugador1 jugador2;
@@ -64,12 +63,6 @@ public class Ventana extends JFrame implements MouseListener{
 
     Jugador1 jugador7;
     PanelJugador1 panelJugador7;
-
-    Jugador1 jugador8;
-    PanelJugador1 panelJugador8;
-
-    Jugador1 jugador9;
-    PanelJugador1 panelJugador9;
 
     //arreglo de objetos
     Jugador1[] jugadores;
@@ -92,7 +85,7 @@ public class Ventana extends JFrame implements MouseListener{
     }
 
 
-    int cantidadDeJugadores = 0;
+    private int cantidadDeJugadores = 0;
     public Ventana(){
         System.out.println(Constantes.WIDTH_PANTALLA);
         cantidadDeJugadores = Configuracion.cantidadDeJugadores;
@@ -163,52 +156,6 @@ public class Ventana extends JFrame implements MouseListener{
                 setAtributosaObjetos(6);
                 break;
 
-            case 4:
-                jugadores = new Jugador1[8];
-                panelesJugadores = new PanelJugador1[8];
-                //nuevo jugador
-                jugador2 = new Jugador1(100,100);
-                panelJugador2 = new PanelJugador1();
-                jugadores[0] = jugador2;
-                panelesJugadores[0] = panelJugador2;
-
-                jugador3 = new Jugador1(100,200);
-                panelJugador3 = new PanelJugador1();
-                jugadores[1] = jugador3;
-                panelesJugadores[1] = panelJugador3;
-
-                jugador4 = new Jugador1(100,300);
-                panelJugador4 = new PanelJugador1();
-                jugadores[2] = jugador4;
-                panelesJugadores[2] = panelJugador4;
-
-                jugador5 = new Jugador1(100,400);
-                panelJugador5 = new PanelJugador1();
-                jugadores[3] = jugador5;
-                panelesJugadores[3] = panelJugador5;
-
-                jugador6 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 100);
-                panelJugador6 = new PanelJugador1();
-                jugadores[4] = jugador6;
-                panelesJugadores[4] = panelJugador6;
-
-                jugador7 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 200);
-                panelJugador7 = new PanelJugador1();
-                jugadores[5] = jugador7;
-                panelesJugadores[5] = panelJugador7;
-
-                jugador8 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 300);
-                panelJugador8 = new PanelJugador1();
-                jugadores[6] = jugador8;
-                panelesJugadores[6] = panelJugador8;
-
-                jugador9 = new Jugador1(Constantes.WIDTH_PANTALLA-150, 400);
-                panelJugador9 = new PanelJugador1();
-                jugadores[7] = jugador9;
-                panelesJugadores[7] = panelJugador9;
-
-                setAtributosaObjetos(8);
-                break;
         }
 
 
@@ -278,13 +225,6 @@ public class Ventana extends JFrame implements MouseListener{
                     actualizarJuego(jugador6, panelJugador6);
                     actualizarJuego(jugador7, panelJugador7);
                 }
-                else if(cantidadDeJugadores == 4){
-                    actualizarJuego(jugador6, panelJugador6);
-                    actualizarJuego(jugador7, panelJugador7);
-                    actualizarJuego(jugador8, panelJugador8);
-                    actualizarJuego(jugador9, panelJugador9);
-                }
-
             }
         });
         gameLoopTimer.start();
@@ -303,12 +243,6 @@ public class Ventana extends JFrame implements MouseListener{
         if(cantidadDeJugadores == 3){
             colocarJugador(panelJugador6);
             colocarJugador(panelJugador7);
-        }
-        else if(cantidadDeJugadores == 4){
-            colocarJugador(panelJugador6);
-            colocarJugador(panelJugador7);
-            colocarJugador(panelJugador8);
-            colocarJugador(panelJugador9);
         }
         colocarCampo();
 
@@ -347,8 +281,8 @@ public class Ventana extends JFrame implements MouseListener{
     }
 
     //variables para mouse
-    double mouseXInicial = 0;
-    double mouseYInicial = 0;
+    private double mouseXInicial = 0;
+    private double mouseYInicial = 0;
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -360,7 +294,7 @@ public class Ventana extends JFrame implements MouseListener{
         mouseXInicial = e.getX();
         mouseYInicial = e.getY();
     }
-    int contadorTurno = 1;
+    private int contadorTurno = 1;
 
     @Override
     public void mouseReleased(MouseEvent e) {
@@ -396,7 +330,6 @@ public class Ventana extends JFrame implements MouseListener{
     public void generarDireccionMouse(double x, double y, Jugador1 jugador){
         if(Math.abs(balon.getVelocidadX())< 0.5 && Math.abs(balon.getVelocidadY()) < 0.5 && jugadoresDetenidos()){
             Rectangle jugadorBounds = jugador.getBounds();
-            colision = 0;
             double mousePositionX = x;
             double mousePositionY = y;
 
@@ -463,9 +396,7 @@ public class Ventana extends JFrame implements MouseListener{
 
         if(boundsBalon.intersects(boundsJugador1)){
             System.out.println("velocidad en x " + jugador.getVelocidadX());
-            keyPress = 0;
             System.out.println("colision");
-            colision = 1;
 
 
             if(Math.abs(balon.getVelocidadX()) < 0.1 && Math.abs(balon.getVelocidadY()) < 0.1){
@@ -607,31 +538,12 @@ public class Ventana extends JFrame implements MouseListener{
         }
 
 
-
-
-
-
-//        if(colision == 1){
-//            double velocidadX = (jugador.getVelocidadX() * 0.89);
-//            double velocidadY = (jugador.getVelocidadY() * 0.89);
-//
-//
-//            jugador.setVelocidadX(velocidadX);
-//            jugador.setVelocidadY(velocidadY);
-//
-//            balon.setVelocidadX(balon.getVelocidadX() * 0.99);
-//            balon.setVelocidadY(balon.getVelocidadY() * 0.99);
-//
-//        }
-
         jugador.setVelocidadX(jugador.getVelocidadX()*0.84);
         jugador.setVelocidadY(jugador.getVelocidadY()*0.84);
 
         balon.setVelocidadX(balon.getVelocidadX() * 0.985);
         balon.setVelocidadY(balon.getVelocidadY() * 0.985);
 
-
-        tecla = 0;
         if (!juegoPausado) {
             jugador.moverJugador();
             panelJugador.repaint();
@@ -718,16 +630,6 @@ public class Ventana extends JFrame implements MouseListener{
                 jugador7.setX(Constantes.WIDTH_PANTALLA - 305); jugador7.setY(335);
                 break;
 
-            case 4:
-                jugador2.setX(100); jugador2.setY(100);
-                jugador3.setX(100); jugador3.setY(200);
-                jugador4.setX(100); jugador4.setY(300);
-                jugador5.setX(100); jugador5.setY(400);
-                jugador6.setX(Constantes.WIDTH_PANTALLA - 150); jugador6.setY(100);
-                jugador7.setX(Constantes.WIDTH_PANTALLA - 150); jugador7.setY(200);
-                jugador8.setX(Constantes.WIDTH_PANTALLA - 150); jugador8.setY(300);
-                jugador9.setX(Constantes.WIDTH_PANTALLA - 150); jugador9.setY(400);
-                break;
         }
 
         // Detener movimiento de jugadores
