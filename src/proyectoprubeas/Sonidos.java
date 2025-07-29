@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Sonidos {
-
+    private static Clip clip;
     public Sonidos() {
     }
 
@@ -18,7 +18,7 @@ public class Sonidos {
             InputStream inputStream = Sonidos.class.getResourceAsStream(ruta);
 
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(inputStream);
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             if (enLoop) {
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -33,6 +33,12 @@ public class Sonidos {
         } catch (LineUnavailableException e) {
             System.err.println(e.getMessage());
             e.printStackTrace();
+        }
+    }
+    public static void detenerSonido() {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+            clip.close();
         }
     }
 }

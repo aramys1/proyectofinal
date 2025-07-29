@@ -8,9 +8,10 @@ public class MenuPrincipal1 {
     private JButton dosVsDos;
     private JButton tresVsTres;
     private JLabel seleccion;
+    Sonidos sonido = new Sonidos();
 
     public MenuPrincipal1(JFrame frame) {
-
+        sonido.reproducirSonido("/RecursosDeSonido/EstadioAmbiente.wav", true);
         menuPrincipal1 = new JPanel(); // INICIALIZAMOS EL PANEL
         menuPrincipal1 = new PanelConimagenes("recursos/FondoMenu.png");
         menuPrincipal1.setLayout(null);
@@ -56,6 +57,7 @@ public class MenuPrincipal1 {
 
 
         dosVsDos.addActionListener(e -> {
+            sonido.detenerSonido();
             Configuracion.cantidadDeJugadores = 2;
             Ventana juego = new Ventana();
             juego.setVisible(true);
@@ -63,6 +65,7 @@ public class MenuPrincipal1 {
         });
 
         tresVsTres.addActionListener(e -> {
+            sonido.detenerSonido();
             Configuracion.cantidadDeJugadores = 3;
             Ventana juego = new Ventana();
             juego.setVisible(true);

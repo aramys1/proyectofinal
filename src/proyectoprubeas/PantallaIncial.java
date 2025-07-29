@@ -6,9 +6,10 @@ import java.awt.*;
 public class PantallaIncial {
     private JPanel PantallaIncial;
     private JButton jugarButton;
+    Sonidos sonido = new Sonidos();
 
     public PantallaIncial(JFrame frame){
-
+        sonido.reproducirSonido("/RecursosDeSonido/EstadioAmbiente.wav", true);
         PantallaIncial = new PanelConimagenes("recursos/Fondo.png");
 
         // Botón encima del fondo
@@ -41,6 +42,9 @@ public class PantallaIncial {
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jugarButton.setFont(new Font("Arial", Font.BOLD, 34)); // vuelve al normal
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                sonido.detenerSonido();
             }
         });
 
