@@ -13,7 +13,7 @@ public class MenuPrincipal1 {
     public MenuPrincipal1(JFrame frame) {
         sonido.reproducirSonido("/RecursosDeSonido/EstadioAmbiente.wav", true);
         menuPrincipal1 = new JPanel(); // INICIALIZAMOS EL PANEL
-        menuPrincipal1 = new PanelConimagenes("recursos/FondoMenu.png");
+        menuPrincipal1 = new PanelConImagenes("recursos/FondoMenu.png");
         menuPrincipal1.setLayout(null);
 
         seleccion = new JLabel();
