@@ -6,9 +6,9 @@ public class Main {
     public static void main(String[] args) {
 
         JFrame frame = new JFrame("Proyecto de Prubeas");
-        PantallaIncial pantallaIncial = new PantallaIncial(frame);
+        Presentacion presentacion = new Presentacion(frame);
 
-        frame.setContentPane(pantallaIncial.getPanel());
+        frame.setContentPane(presentacion.getPanel());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(938, 938);
         frame.setVisible(true);
