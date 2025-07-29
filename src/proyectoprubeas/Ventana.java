@@ -23,6 +23,13 @@ public class Ventana extends JFrame implements MouseListener{
             }
         }
     };
+
+    //objeto para el sonido
+    Sonidos sonidos = new Sonidos();
+
+
+
+
     public JPanel panel = new JPanel();
     PanelPelota pelota = new PanelPelota();
     Balon balon = new Balon();
@@ -471,6 +478,7 @@ public class Ventana extends JFrame implements MouseListener{
 
             if(Math.abs(balon.getVelocidadX()) < 0.1 && Math.abs(balon.getVelocidadY()) < 0.1){
                 System.out.println("el jugador golpea");
+                sonidos.reproducirSonido("golpe.wav");
 
                 //pruebas
                 double dx = balon.getX() - jugador.getX();
@@ -512,6 +520,7 @@ public class Ventana extends JFrame implements MouseListener{
             }
             else{
                 System.out.println("el balon golpea");
+                sonidos.reproducirSonido("golpe.wav");
                 double dx = balon.getX() - jugador.getX();
                 double dy = balon.getY() - jugador.getY();
                 double hipotenusa = Math.sqrt(dx*dx + dy*dy);
