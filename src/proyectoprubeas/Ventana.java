@@ -31,6 +31,10 @@ public class Ventana extends JFrame implements MouseListener{
     boolean golEnProceso = false;
     int golesParaGanar = 3;
 
+
+    //objetos para sonidos
+    Sonidos sonido = new Sonidos();
+
     Timer gameLoopTimer;
     int golesAzul = 0;
     int golesRojo = 0;
@@ -287,7 +291,7 @@ public class Ventana extends JFrame implements MouseListener{
     }
 
     public void iniciarComponentes(){
-
+        sonido.reproducirSonido("/RecursosDeSonido/EstadioAmbiente.wav", true);
         colocarPanel();
         colocarPelota();
 
@@ -464,6 +468,7 @@ public class Ventana extends JFrame implements MouseListener{
 
 
             if(Math.abs(balon.getVelocidadX()) < 0.1 && Math.abs(balon.getVelocidadY()) < 0.1){
+                sonido.reproducirSonido("/RecursosDeSonido/GolpeDeBalon.wav", false);
                 System.out.println("el jugador golpea");
 
                 //pruebas
@@ -505,6 +510,7 @@ public class Ventana extends JFrame implements MouseListener{
 
             }
             else{
+                sonido.reproducirSonido("/RecursosDeSonido/GolpeDeBalon.wav", false);
                 System.out.println("el balon golpea");
                 double dx = balon.getX() - jugador.getX();
                 double dy = balon.getY() - jugador.getY();

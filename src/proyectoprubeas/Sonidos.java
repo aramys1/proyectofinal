@@ -12,7 +12,7 @@ public class Sonidos {
     }
 
     //Metodo que reproduce el sonido
-    public static void reproducirSonido(String ruta) {
+    public static void reproducirSonido(String ruta, boolean enLoop) {
         try {
             File archivo = new File(ruta);
             InputStream inputStream = Sonidos.class.getResourceAsStream(ruta);
@@ -20,6 +20,9 @@ public class Sonidos {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(inputStream);
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
+            if (enLoop) {
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+            }
             clip.start();
         } catch (UnsupportedAudioFileException e) {
             System.err.println(e.getMessage());
