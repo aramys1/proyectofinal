@@ -236,6 +236,15 @@ public class Ventana extends JFrame implements MouseListener{
 
     public void iniciarComponentes(){
         sonido1.reproducirSonido("/RecursosDeSonido/EstadioAmbiente.wav", true);
+        new javax.swing.Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sonido.reproducirSonido("/RecursosDeSonido/EfectoDeSonidoPitido.wav", false);
+                ((javax.swing.Timer) e.getSource()).stop();
+            }
+        }).start();
+
+
         colocarPanel();
         colocarPelota();
 
