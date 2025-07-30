@@ -12,7 +12,7 @@ public class MenuPrincipal1 {
 
     public MenuPrincipal1(JFrame frame) {
         sonido.reproducirSonido("/RecursosDeSonido/EstadioAmbiente.wav", true);
-        menuPrincipal1 = new JPanel(); // INICIALIZAMOS EL PANEL
+        menuPrincipal1 = new JPanel();
         menuPrincipal1 = new PanelConImagenes("recursos/FondoMenu.png");
         menuPrincipal1.setLayout(null);
 
@@ -39,7 +39,7 @@ public class MenuPrincipal1 {
 
         dosVsDos.setBounds(150, 300, 300, 300);
         dosVsDos.setFont(new Font("Dialog", Font.BOLD, 20));
-        dosVsDos.setForeground(Color.WHITE); // texto blanco
+        dosVsDos.setForeground(Color.WHITE);
         dosVsDos.setBackground(Color.GREEN);
         dosVsDos.setHorizontalAlignment(SwingConstants.CENTER);
         menuPrincipal1.add(dosVsDos);
@@ -49,7 +49,7 @@ public class MenuPrincipal1 {
         tresVsTres = new JButton(icon2);
         tresVsTres.setBounds(500, 300, 300, 300);
         tresVsTres.setFont(new Font("Dialog", Font.BOLD, 20));
-        dosVsDos.setForeground(Color.WHITE); // texto blanco
+        dosVsDos.setForeground(Color.WHITE);
         tresVsTres.setBackground(Color.GREEN);
         dosVsDos.setHorizontalAlignment(SwingConstants.CENTER);
         menuPrincipal1.add(tresVsTres);

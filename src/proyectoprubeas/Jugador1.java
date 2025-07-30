@@ -16,7 +16,7 @@ public class Jugador1 {
         this.y = y;
     }
 
-    //metodo que mueve el balon
+
     public void moverJugador(){
         if(Math.abs(this.velocidadX) < 0.01) this.velocidadX = 0;
         if(Math.abs(this.velocidadY) < 0.01) this.velocidadY = 0;
@@ -41,7 +41,7 @@ public class Jugador1 {
             velocidadY = velocidadY * 0.7;
         }
 
-        // Comprobar colisión con bordes verticales y rebotar
+
         if (y < 0) {
             sonido.reproducirSonido("/RecursosDeSonido/sonidoparedmodificado.wav", false);
             y = 0;

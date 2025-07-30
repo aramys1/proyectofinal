@@ -11,7 +11,7 @@ public class Sonidos {
     public Sonidos() {
     }
 
-    //Metodo que reproduce el sonido
+
     public void reproducirSonido(String ruta, boolean enLoop) {
         try {
             File archivo = new File(ruta);

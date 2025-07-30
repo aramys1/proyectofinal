@@ -502,7 +502,7 @@ public class Ventana extends JFrame implements MouseListener{
 
 
 
-        //balon balon
+
         int i = 0;
         int j = 0;
         int frenoDeMano = 0;
