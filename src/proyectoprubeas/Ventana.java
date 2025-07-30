@@ -35,6 +35,7 @@ public class Ventana extends JFrame implements MouseListener{
     private int golesParaGanar = 3;
 
 
+
     //objetos para sonidos
     Sonidos sonido = new Sonidos();
     Sonidos sonido1 = new Sonidos();
@@ -182,7 +183,7 @@ public class Ventana extends JFrame implements MouseListener{
         panelPorterias.setBounds(0, 0, panel.getWidth(), panel.getHeight());
 
         // Configurar marcador
-        marcadorLabel.setText("Azul: 0     Rojo: 0");
+        marcadorLabel.setText("PAN: 0     EUA: 0");
         marcadorLabel.setFont(new Font("Arial", Font.BOLD, 24));
         marcadorLabel.setForeground(Color.WHITE);
         marcadorLabel.setBounds(Constantes.WIDTH_PANTALLA / 2 - 150, 10, 300, 50);
@@ -204,8 +205,10 @@ public class Ventana extends JFrame implements MouseListener{
         marcadorPanel.setOpaque(false);
 
         panel.add(marcadorPanel);
-        //panel.setLayout(null);  // ya lo tienes, por si las moscas
-        //panel.add(marcadorLabel);
+        panel.setLayout(null);
+        panel.setComponentZOrder(marcadorPanel, 0);
+
+
 
 
 
@@ -389,6 +392,7 @@ public class Ventana extends JFrame implements MouseListener{
 
     }
 
+
     public void actualizarJuego(Jugador1 jugador, PanelJugador1 panelJugador){
         Rectangle boundsBalon = balon.getBounds();
         Rectangle boundsJugador1 = jugador.getBounds();
@@ -486,6 +490,9 @@ public class Ventana extends JFrame implements MouseListener{
 
         }
 
+
+
+
         //balon balon
         int i = 0;
         int j = 0;
@@ -550,19 +557,22 @@ public class Ventana extends JFrame implements MouseListener{
             balon.moverBalon();
             pelota.repaint(); 
         }
+
+
         // Detección de gol
         if (!golEnProceso && porteriaIzquierda.balonEntra(balon.getBounds())) {
             golEnProceso = true;
             golesRojo++;
-            marcadorLabel.setText("Azul: " + golesAzul + "  |  Rojo: " + golesRojo);
+            sonido.reproducirSonido("/RecursosDeSonido/EfectoDeSonidoGol.wav", false);
+            marcadorLabel.setText("PAN: " + golesAzul + "  |  EUA: " + golesRojo);
             System.out.println("¡GOL DEL EQUIPO ROJO!");
             if (golesRojo >= golesParaGanar) {
-                terminarJuego("Rojo");
+                terminarJuego("ESTADOS UNIDOS");
                 return;
             }
             juegoPausado = true;
 
-            new Timer(2000, new ActionListener() {
+            new Timer(3000, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
                     reiniciarPosiciones();
@@ -576,14 +586,16 @@ public class Ventana extends JFrame implements MouseListener{
         if (!golEnProceso && porteriaDerecha.balonEntra(balon.getBounds())) {
             golEnProceso = true;
             golesAzul++;
-            marcadorLabel.setText("Azul: " + golesAzul + "     Rojo: " + golesRojo);
+            // Sonido de gol
+            sonido.reproducirSonido("/RecursosDeSonido/EfectoDeSonidoGol.wav", false);
+            marcadorLabel.setText("PAN: " + golesAzul + "     EUA: " + golesRojo);
             System.out.println("¡GOL DEL EQUIPO AZUL!");
             juegoPausado = true;
             if (golesAzul >= golesParaGanar) {
-                terminarJuego("Azul");
+                terminarJuego("PANAMÁ");
                 return;
             }
-            new Timer(2000, new ActionListener() {
+            new Timer(3000, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
                     reiniciarPosiciones();
@@ -644,6 +656,14 @@ public class Ventana extends JFrame implements MouseListener{
             panelJugador.repaint();
         }
         panelPorterias.repaint();
+        new javax.swing.Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sonido.reproducirSonido("/RecursosDeSonido/EfectoDeSonidoPitido.wav", false);
+                ((javax.swing.Timer) e.getSource()).stop();
+            }
+        }).start();
+
     }
 
     public void terminarJuego(String equipoGanador) {
@@ -652,7 +672,7 @@ public class Ventana extends JFrame implements MouseListener{
 
         int opcion = JOptionPane.showOptionDialog(
             this,
-            "¡Ganó el equipo " + equipoGanador + "!\n¿Qué deseas hacer?",
+            "¡Ganó " + equipoGanador + "!\n¿Qué deseas hacer?",
             "Fin del juego",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.INFORMATION_MESSAGE,
