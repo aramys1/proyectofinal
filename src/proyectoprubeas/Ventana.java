@@ -351,10 +351,10 @@ public class Ventana extends JFrame implements MouseListener{
 
                 double symbolX = 1;
                 double symbolY = 1;
-                if(mousePositionX > jugador.getX()){
+                if(mousePositionX < jugador.getX()){
                     symbolX = -1;
                 }
-                if(mousePositionY > jugador.getY()){
+                if(mousePositionY < jugador.getY()){
                     symbolY = -1;
                 }
 
